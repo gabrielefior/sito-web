@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Bussola">
+  <defs>
+    <radialGradient id="face" cx="36%" cy="28%" r="72%">
+      <stop offset="0" stop-color="#fff7cf"/>
+      <stop offset=".55" stop-color="#f4d986"/>
+      <stop offset="1" stop-color="#c79a31"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="18" y1="16" x2="76" y2="82" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe28a"/>
+      <stop offset=".45" stop-color="#f0a52e"/>
+      <stop offset="1" stop-color="#9e601d"/>
+    </linearGradient>
+    <filter id="drop" x="-16%" y="-16%" width="132%" height="132%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#604313" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <circle filter="url(#drop)" cx="48" cy="50" r="38" fill="url(#ring)"/>
+  <circle cx="48" cy="50" r="29" fill="url(#face)"/>
+  <path d="M48 25v7M48 68v7M23 50h7M66 50h7" stroke="#8d641d" stroke-width="4" stroke-linecap="round" opacity=".75"/>
+  <path d="M58 39 50 66 38 55 30 45Z" fill="#2677ff"/>
+  <path d="M38 55 46 28 58 39 66 49Z" fill="#ff4b45"/>
+  <circle cx="48" cy="50" r="5.5" fill="#fff1a6"/>
+  <path d="M33 31c9-8 25-9 35 0" fill="none" stroke="#fff6cb" stroke-width="5" stroke-linecap="round" opacity=".72"/>
+</svg>
