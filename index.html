@@ -5,8 +5,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Gabriele Fiorani - Full Stack Marketer freelance. Marketing, dati, sperimentazione." />
+        content="Full Stack Marketer | +7 Anni di esperienza | Nerd di Dati, Funnel & Conversion" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Gabriele Fiorani" />
+    <link rel="canonical" href="https://gabrielefiorani.it/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gabrielefiorani.it/" />
+    <meta property="og:title" content="Gabriele Fiorani - Full Stack Marketer" />
+    <meta property="og:description"
+        content="Full Stack Marketer | +7 Anni di esperienza | Nerd di Dati, Funnel & Conversion" />
+    <meta property="og:image" content="https://gabrielefiorani.it/img/hero_bw.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Gabriele Fiorani" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gabriele Fiorani - Full Stack Marketer" />
+    <meta name="twitter:description"
+        content="Full Stack Marketer | +7 Anni di esperienza | Nerd di Dati, Funnel & Conversion" />
+    <meta name="twitter:image" content="https://gabrielefiorani.it/img/hero_bw.png" />
+    <meta name="twitter:image:alt" content="Gabriele Fiorani" />
     <title>Gabriele Fiorani - Full Stack Marketer</title>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Gabriele Fiorani",
+            "url": "https://gabrielefiorani.it/",
+            "image": "https://gabrielefiorani.it/img/hero_bw.png",
+            "jobTitle": "Full Stack Marketer",
+            "description": "Full Stack Marketer con oltre 7 anni di esperienza in dati, funnel e conversion.",
+            "email": "mailto:fiorani.gb@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Milano",
+                "addressCountry": "IT"
+            },
+            "knowsAbout": [
+                "Full Stack Marketing",
+                "Growth Strategy",
+                "Analytics",
+                "Funnel Design",
+                "Conversion Rate Optimization",
+                "Performance Marketing",
+                "CRM Automation"
+            ],
+            "sameAs": [
+                "https://www.linkedin.com/in/gabriele-fiorani/",
+                "https://www.instagram.com/gabrielefiorani/"
+            ]
+        }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1141,6 +1190,94 @@
         .is-revealed.hero__cta-row {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                min-height: auto;
+                padding: 112px 0 var(--s-10);
+                align-items: flex-start;
+            }
+
+            .hero__inner {
+                gap: var(--s-8);
+                align-items: start;
+            }
+
+            .hero__left {
+                display: contents;
+            }
+
+            .hero__meta {
+                order: 1;
+                margin-bottom: var(--s-4);
+                gap: var(--s-5);
+                row-gap: var(--s-6);
+            }
+
+            .hero__title {
+                order: 2;
+                font-size: clamp(48px, 12.4vw, 58px);
+                line-height: 0.96;
+                letter-spacing: -0.045em;
+                margin-bottom: 0;
+                max-width: 100%;
+            }
+
+            .hero__title-row {
+                display: inline;
+                overflow: visible;
+                padding: 0;
+            }
+
+            .hero__title-row>span {
+                display: inline-block;
+            }
+
+            .hero__title .wave {
+                width: 0.66em;
+                height: 0.66em;
+                vertical-align: -0.02em;
+            }
+
+            .hero__photo-col {
+                order: 3;
+                width: 100%;
+                margin-top: calc(var(--s-2) * -1);
+            }
+
+            .hero__photo {
+                aspect-ratio: 4 / 3;
+                max-width: none;
+                width: 100%;
+                margin: 0;
+            }
+
+            .hero__photo img {
+                object-position: center 18%;
+                transform: scale(1.04);
+            }
+
+            .hero__sub {
+                order: 4;
+                max-width: none;
+                margin-bottom: 0;
+                font-size: 17px;
+                line-height: 1.52;
+            }
+
+            .hero__cta-row {
+                order: 5;
+                width: 100%;
+                gap: var(--s-3);
+            }
+
+            .hero__cta-row .btn {
+                flex: 1 1 0;
+                justify-content: center;
+                min-width: 0;
+                padding-inline: var(--s-4);
+            }
         }
 
         /* ================================================================
