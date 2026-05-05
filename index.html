@@ -3962,7 +3962,6 @@
                 payload[fieldIds.email] = form.elements.email.value.trim();
                 payload[fieldIds.message] = form.elements.message.value.trim();
                 payload.completion_time = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
-                payload.is_partial = false;
 
                 if (submit) submit.disabled = true;
                 if (label) label.textContent = 'Invio in corso';
