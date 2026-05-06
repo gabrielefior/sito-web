@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Fiorani;Gabriele;;;
+FN:Gabriele Fiorani
+TITLE:Full Stack Marketer
+EMAIL;TYPE=INTERNET,WORK:fiorani.gb@gmail.com
+TEL;TYPE=CELL:+393206985749
+URL:https://gabrielefiorani.it/
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/gabriele-fiorani/
+X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/gabrielefiorani/
+ADR;TYPE=WORK:;;;Milano;;;Italia
+NOTE:Full Stack Marketer | +7 anni di esperienza
+END:VCARD
