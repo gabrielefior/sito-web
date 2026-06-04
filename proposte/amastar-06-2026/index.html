@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Proposta di collaborazione — Amastar</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0f;--bg2:#141417;--card:#16161a;--line:#26262c;
+    --lime:#c8f060;--white:#f4f4ef;--muted:#8a8a92;--muted2:#5b5b62;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--white);font-family:'Satoshi',sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:
+    radial-gradient(circle at 18% 10%,rgba(200,240,96,.11),transparent 26%),
+    radial-gradient(circle at 82% 36%,rgba(244,244,239,.055),transparent 28%),
+    linear-gradient(180deg,rgba(255,255,255,.035),transparent 240px);opacity:.8;z-index:-2}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,rgba(0,0,0,.7),transparent 62%);z-index:-1}
+  .wrap{max-width:780px;margin:0 auto;padding:60px 30px 84px}
+  .mono{font-family:'Satoshi',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:500}
+  h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+
+  header{border-bottom:1px solid var(--line);padding-bottom:30px;margin-bottom:44px;position:relative}
+  header::after{content:"";position:absolute;left:0;bottom:-1px;width:120px;height:1px;background:var(--lime);box-shadow:0 0 22px rgba(200,240,96,.5)}
+  header h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:16px}
+  header h1 .acc{color:var(--lime)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 26px;color:var(--muted);font-size:12.5px;margin-top:8px}
+  .meta b{color:var(--white);font-weight:500}
+
+  section{margin-bottom:46px}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .lbl{color:var(--lime);margin-bottom:16px}
+  h2{font-size:20px;margin-bottom:14px}
+  p{color:#d9d9d4}
+  p+p{margin-top:11px}
+  .ar{color:var(--lime);font-weight:700;margin:0 3px}
+
+  .crit{display:grid;gap:22px;grid-template-columns:1fr}
+  @media(min-width:680px){.crit{grid-template-columns:1fr 1fr}}
+  .crit .grp h3{font-size:13.5px;color:var(--white);margin-bottom:12px}
+  .crit ul{list-style:none;display:grid;gap:9px}
+  .crit li{font-size:12.5px;color:#cfcfca;padding-left:20px;position:relative;line-height:1.45}
+  .crit li::before{content:"\2192";position:absolute;left:0;top:0;color:var(--lime);font-weight:700}
+
+  .mod{border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:13px;background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(20,20,23,.96));transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .mod:hover{transform:translateY(-2px);border-color:rgba(200,240,96,.28);box-shadow:0 18px 46px rgba(0,0,0,.22)}
+  .mod-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .mod-top h3{font-size:16px}
+  .mod-price{font-family:'Clash Display',sans-serif;color:var(--lime);font-size:16px;font-weight:600;white-space:nowrap}
+  .mod p{font-size:13px;color:var(--muted);margin-top:8px}
+  .dlbl{font-family:'Satoshi',monospace;letter-spacing:.16em;text-transform:uppercase;font-size:9.5px;color:var(--muted2);margin-top:15px;margin-bottom:9px}
+  .phases{list-style:none;display:grid;gap:9px}
+  .phases li{font-size:12.5px;color:#cfcfca;padding-left:18px;position:relative;line-height:1.45}
+  .phases li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--lime);border-radius:50%}
+  .phases li b{color:var(--white);font-weight:500}
+  .phases li .pp{color:var(--lime);font-family:'Clash Display',sans-serif;font-size:11.5px;margin-left:4px}
+  .deliv{list-style:none;display:grid;gap:8px}
+  .deliv li{font-size:12.5px;color:#cfcfca;padding-left:20px;position:relative;line-height:1.45}
+  .deliv li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--lime);font-weight:700;font-size:12px}
+
+  .opts{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:720px){.opts{grid-template-columns:repeat(3,1fr)}}
+  .opt{border:1px solid var(--line);border-radius:14px;padding:24px 20px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(22,22,26,.96));position:relative;display:flex;flex-direction:column;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .opt:hover{transform:translateY(-3px);border-color:rgba(244,244,239,.18);box-shadow:0 20px 52px rgba(0,0,0,.24)}
+  .opt.best{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime),0 0 32px rgba(200,240,96,.10)}
+  .opt .tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--lime);color:#0d0d0f;font-family:'Satoshi',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .opt h3{font-size:18px;margin-bottom:15px}
+  .opt.best h3{color:var(--lime)}
+  .opt ul{list-style:none;margin-bottom:18px}
+  .opt li{font-size:12.5px;color:#d2d2cd;padding-left:18px;position:relative;line-height:1.45;margin-bottom:9px}
+  .opt li:last-child{margin-bottom:0}
+  .opt li::before{content:"+";position:absolute;left:0;top:0;color:var(--lime);font-weight:700}
+  .price{margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+  .price .was{color:var(--muted2);text-decoration:line-through;font-size:12px;margin-right:6px}
+  .price .now{font-family:'Clash Display',sans-serif;font-size:25px;font-weight:700;color:var(--white)}
+  .opt.best .now{color:var(--lime)}
+  .price .disc{display:inline-block;font-family:'Satoshi',monospace;font-size:10px;font-weight:700;color:var(--lime);background:rgba(200,240,96,.12);border:1px solid rgba(200,240,96,.30);padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle}
+
+  .strip{border:1px dashed rgba(200,240,96,.24);border-radius:12px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(200,240,96,.055),rgba(20,20,23,.92))}
+  .strip h3{font-size:15px;margin-bottom:4px}
+  .strip p{font-size:12.5px;color:var(--muted);max-width:520px}
+  .strip .px{font-family:'Clash Display',sans-serif;color:var(--lime);font-size:19px;font-weight:600;white-space:nowrap}
+
+  .note-sec{margin-top:10px}
+  .notelbl{font-family:'Satoshi',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:9.5px;color:var(--muted2);margin-bottom:11px}
+  .notes{display:grid;gap:7px}
+  .notes li{list-style:none;font-size:11px;line-height:1.5;color:#6f6f76;padding-left:15px;position:relative}
+  .notes li::before{content:"\00B7";position:absolute;left:4px;top:-1px;color:var(--muted2);font-weight:700}
+
+  .cta{border:1px solid rgba(200,240,96,.34);border-radius:16px;margin-top:56px;padding:34px 34px 30px;text-align:center;background:linear-gradient(180deg,rgba(200,240,96,.12),rgba(20,20,23,.92));box-shadow:0 0 0 1px rgba(200,240,96,.08),0 18px 60px rgba(0,0,0,.28);position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent 0%,rgba(200,240,96,.16) 42%,transparent 68%);transform:translateX(-100%);animation:sheen 6s ease-in-out infinite;pointer-events:none}
+  .cta>*{position:relative}
+  .cta .eyebrow{color:var(--lime);margin-bottom:12px}
+  .cta h2{font-size:clamp(24px,4vw,34px);max-width:620px;margin:0 auto 14px}
+  .cta p{color:#d9d9d4;font-size:14px;margin-bottom:22px;max-width:590px;margin-left:auto;margin-right:auto}
+  .cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0 28px}
+  .cta-actions a{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 18px;text-decoration:none;font-size:13px;font-weight:700}
+  .cta-actions .primary{background:var(--lime);color:#0d0d0f}
+  .cta-actions .secondary{border:1px solid rgba(244,244,239,.22);color:var(--white);background:rgba(255,255,255,.04)}
+  .sign{display:inline-flex;flex-direction:column;align-items:center;gap:2px;border-top:1px solid rgba(244,244,239,.12);padding-top:22px;width:100%}
+  .sign .nm{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:600}
+  .sign .rl{color:var(--lime);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  .sign .ct{color:var(--muted);font-size:12px;margin-top:8px}
+  .sign .ct a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:12px}
+  .contact-links a{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--white);text-decoration:none;font-size:12px;background:var(--bg2)}
+  .contact-links a:hover{border-color:rgba(200,240,96,.55);color:var(--lime)}
+  .contact-links svg{width:13px;height:13px;fill:currentColor;flex:0 0 auto}
+  @keyframes sheen{0%,55%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+
+  @media print{
+    @page{size:A4;margin:16mm 15mm;background:#0d0d0f}
+    html,body{background:#0d0d0f}
+    body::before,body::after,.cta::before{display:none}
+    .wrap{max-width:none;padding:0}
+    .reveal{opacity:1;transform:none}
+    section{margin-bottom:26px}
+    header{margin-bottom:28px;padding-bottom:22px}
+    .crit{display:flex;gap:26px}
+    .crit .grp{flex:1}
+    .opts{display:flex;gap:12px}
+    .opt{flex:1;display:block}
+    .opt ul{min-height:106px}
+    .price{margin-top:0}
+    .crit ul,.notes,.phases,.deliv{display:block}
+    .crit li,.phases li,.deliv li{margin-bottom:7px}
+    .notes li{margin-bottom:6px}
+    .mod{margin-bottom:11px}
+    .cta{margin-top:28px;padding-top:22px}
+    header,.mod,.opt,.strip,.crit .grp,.cta,.note-sec{break-inside:avoid}
+    .lbl,.notelbl{break-after:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Proposta di collaborazione:<br><span class="acc">Amastar Srl</span></h1>
+    <div class="meta">
+      <span><b>Gabriele Fiorani</b> · Full Stack Marketer</span>
+      <span>Giugno 2026</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="lbl mono">// Premessa</div>
+    <p>Questa proposta nasce dal confronto con Stefano e da una prima analisi di come Amastar lavora oggi. L'obiettivo è intervenire su due fronti: l'efficienza dell'operatività interna e la capacità di acquisire nuovi clienti in modo strutturato.</p>
+    <p>Gli interventi sono modulari e si possono attivare insieme o singolarmente, con pagamento legato alla consegna di ogni fase.</p>
+  </section>
+
+  <section>
+    <div class="lbl mono">// Criticità riscontrate</div>
+    <div class="crit">
+      <div class="grp">
+        <h3>Operatività interna</h3>
+        <ul>
+          <li>Processi non formalizzati: l'attività dipende dalle persone più che da un sistema documentato e replicabile.</li>
+          <li>Nessuna knowledge base condivisa dove consolidare processi, casi studio e materiali.</li>
+          <li>Modello di prezzo da rivedere per assicurare una marginalità coerente sui servizi erogati.</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h3>Acquisizione e visibilità</h3>
+        <ul>
+          <li>Acquisizione clienti affidata quasi solo al passaparola, senza un sistema replicabile.</li>
+          <li>Posizionamento online e SEO limitati, con bassa visibilità sui canali digitali.</li>
+          <li>Sito web non allineato al livello del servizio offerto.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="lbl mono">// Gli interventi</div>
+
+    <div class="mod">
+      <div class="mod-top">
+        <h3>1. Foundation: processi e Knowledge Base</h3>
+        <span class="mod-price">€2.400</span>
+      </div>
+      <p>Rendiamo i processi di lavoro espliciti e documentati, così l'operatività non dipende più dalle singole persone. Tre fasi, ciascuna con un deliverable a sé e pagata alla consegna.</p>
+      <div class="dlbl">Cosa ottieni, fase per fase</div>
+      <ul class="phases">
+        <li><b>Discovery e mappatura</b><span class="ar">&#8594;</span> mappa dei processi attuali e diagnosi dei colli di bottiglia <span class="pp">€700</span></li>
+        <li><b>Ridisegno e standardizzazione</b><span class="ar">&#8594;</span> nuovi flussi documentati, procedura di onboarding cliente, automazioni di base sui passaggi ripetitivi <span class="pp">€900</span></li>
+        <li><b>Knowledge Base su Notion*</b><span class="ar">&#8594;</span> archivio aziendale con procedure operative standard, casi studio, template e asset, consultabili da tutto il team <span class="pp">€800</span></li>
+      </ul>
+    </div>
+
+    <div class="mod">
+      <div class="mod-top">
+        <h3>2. Pricing model e tiering</h3>
+        <span class="mod-price">€2.000</span>
+      </div>
+      <p>Rivediamo come Amastar costruisce e vende i propri servizi, per assicurare una marginalità coerente su ogni cliente.</p>
+      <div class="dlbl">Cosa ottieni</div>
+      <ul class="deliv">
+        <li>Analisi del costo di erogazione e della marginalità per servizio e per cliente</li>
+        <li>Nuovo listino strutturato in due o tre tier, con perimetro di servizio definito per ciascuno</li>
+        <li>Logica di pricing e target di margine per tier, con percorsi di upsell</li>
+        <li>Simulazione dell'impatto del nuovo modello sui conti</li>
+      </ul>
+    </div>
+
+    <div class="mod">
+      <div class="mod-top">
+        <h3>3. Sito web</h3>
+        <span class="mod-price">€1.800</span>
+      </div>
+      <p>Una vetrina one page allineata al livello del servizio offerto, pensata per chiarire il posizionamento di Amastar e supportare l'acquisizione.</p>
+      <div class="dlbl">Cosa ottieni</div>
+      <ul class="deliv">
+        <li>One page site: struttura, design e copy di posizionamento in un percorso chiaro e scorrevole</li>
+        <li>Ottimizzazione mobile e SEO di base (struttura, meta tag, performance)</li>
+        <li>Sezione servizi, casi studio e prova sociale a supporto della parte commerciale</li>
+        <li>Sezione FAQ strutturata per intercettare ricerche specifiche e aumentare la probabilità di citazione nelle risposte generate da AI e motori di ricerca</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="lbl mono">// Le opzioni</div>
+    <div class="opts">
+
+      <div class="opt">
+        <h3>Opzione 1</h3>
+        <ul>
+          <li>Foundation + Knowledge Base</li>
+          <li>Processi documentati e replicabili</li>
+        </ul>
+        <div class="price">
+          <span class="now">€2.400</span>
+        </div>
+      </div>
+
+      <div class="opt best">
+        <div class="tag">Consigliata</div>
+        <h3>Opzione 2</h3>
+        <ul>
+          <li>Opzione 1 inclusa</li>
+          <li>Pricing model e tiering</li>
+          <li>2 mesi di affiancamento</li>
+        </ul>
+        <div class="price">
+          <span class="was">€4.400</span><span class="now">€3.900</span><span class="disc">&#8722;11%</span>
+        </div>
+      </div>
+
+      <div class="opt">
+        <h3>Opzione 3</h3>
+        <ul>
+          <li>Opzione 2 inclusa</li>
+          <li>Nuovo one page site</li>
+          <li>3 mesi di affiancamento</li>
+        </ul>
+        <div class="price">
+          <span class="was">€6.200</span><span class="now">€5.500</span><span class="disc">&#8722;11%</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="strip">
+      <div>
+        <h3>Affiancamento continuativo</h3>
+        <p>Presidio mensile leggero e opzionale, fino a 4 ore/mese: aggiornamento della knowledge base, manutenzione dei processi, supporto operativo e formazione per i nuovi ingressi. Attività extra quotate a parte.</p>
+      </div>
+      <span class="px">€300<small style="font-size:11px;color:var(--muted)">/mese</small></span>
+    </div>
+  </section>
+
+  <section class="note-sec">
+    <div class="notelbl">Note</div>
+    <ul class="notes">
+      <li>Acconto del 30% all'avvio, indipendentemente dall'opzione scelta; il saldo è legato alla consegna di ciascun deliverable.</li>
+      <li>Sono inclusi due giri di revisione per deliverable; modifiche ulteriori o attività fuori perimetro sono quotate a parte.</li>
+      <li>I deliverable diventano di proprietà del Cliente a saldo avvenuto; il Professionista può citarli nel proprio portfolio, salvo diversa indicazione del Cliente.</li>
+      <li>Il compenso remunera il risultato e la competenza professionale, indipendentemente dagli strumenti impiegati nell'esecuzione, inclusi quelli di intelligenza artificiale.</li>
+      <li>Il Cliente autorizza l'utilizzo dei materiali forniti con strumenti di intelligenza artificiale, nei limiti necessari all'incarico e con esclusione di dati personali di terzi salvo previa anonimizzazione.</li>
+      <li>L'approvazione dei contenuti da parte del Cliente ne comporta l'accettazione; la verifica finale di accuratezza e conformità resta in capo al Cliente.</li>
+      <li>L'affiancamento mensile include fino a 4 ore/mese di presidio leggero su knowledge base, processi interni, piccoli allineamenti operativi e formazione per nuovi ingressi.</li>
+      <li>Restano esclusi dall'affiancamento mensile: strategia marketing continuativa, gestione operativa dei clienti, sviluppo o manutenzione evolutiva del sito, campagne advertising e nuove implementazioni non previste dai deliverable.</li>
+      <li>Le ore extra e le consulenze fuori perimetro sono quotate a €80/ora, oppure tramite pacchetti dedicati da concordare in base al volume di lavoro richiesto.</li>
+      <li>L'affiancamento prosegue a €300/mese al termine dei mesi inclusi, disdicibile in qualsiasi momento.</li>
+      <li>La gestione operativa dei singoli clienti (es. Apaxil) resta esterna a questa proposta.</li>
+      <li>Importi esenti IVA in regime forfettario (operazione in franchigia ai sensi dell'art. 1, commi 54-89, L. 190/2014); a ogni fattura si aggiunge la marca da bollo di €2.</li>
+      <li>* La Knowledge Base sarà realizzata su Notion o su uno strumento equivalente, da definire con il team.</li>
+      <li>Validità dell'offerta: 30 giorni.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <div class="eyebrow mono">Prossimo step</div>
+    <h2>Partiamo dal modulo più urgente e costruiamo una base più solida.</h2>
+    <p>Per confermare o discutere la proposta, scrivimi pure su WhatsApp al mio numero lavorativo: possiamo chiarire gli ultimi dettagli e definire insieme il punto di partenza.</p>
+    <div class="cta-actions">
+      <a class="primary" href="https://wa.me/393780949839?text=Ciao%20Gabriele%2C%20ti%20scrivo%20per%20la%20proposta%20Amastar.">Scrivimi su WhatsApp</a>
+    </div>
+    <div class="sign">
+      <span class="nm">Gabriele Fiorani</span>
+      <span class="rl mono">Full Stack Marketer</span>
+      <div class="contact-links">
+        <a href="https://gabrielefiorani.it">gabrielefiorani.it</a>
+        <a href="mailto:info@gabrielefiorani.it">info@gabrielefiorani.it</a>
+        <a href="tel:+393780949839">+39 378 094 9839</a>
+        <a href="https://it.linkedin.com/in/gabriele-fiorani">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.32 8.03h4.36V23H.32V8.03zM8.22 8.03h4.18v2.05h.06c.58-1.1 2-2.26 4.12-2.26 4.41 0 5.22 2.9 5.22 6.67V23h-4.35v-7.55c0-1.8-.03-4.12-2.51-4.12-2.52 0-2.9 1.97-2.9 3.99V23H8.22V8.03z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+  document.querySelectorAll('header, section, .cta').forEach((el) => el.classList.add('reveal'));
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
