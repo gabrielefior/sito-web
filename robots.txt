@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow: /proposte/
 
 Sitemap: https://gabrielefiorani.it/sitemap.xml
