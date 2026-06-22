@@ -10,187 +10,136 @@
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0d0d0f;
-    --bg2:#141417;
-    --card:#16161a;
-    --card-hi:#1c1c22;
-    --line:#26262c;
-    --line-hi:#3a3a44;
-    --lime:#c8f060;
-    --lime-dim:#9bc04a;
-    --white:#f4f4ef;
-    --muted:#8a8a92;
-    --muted2:#5b5b62;
-    --warn:#ff8a4c;
+    --bg:#0d0d0f;--bg2:#141417;--card:#16161a;--line:#26262c;
+    --lime:#c8f060;--white:#f4f4ef;--muted:#8a8a92;--muted2:#5b5b62;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--white);
-    font-family:'Satoshi',sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:880px;margin:0 auto;padding:64px 28px 90px}
-
-  /* TYPOGRAPHY */
-  h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;line-height:1.1;letter-spacing:-.01em}
-  h1{font-size:54px;letter-spacing:-.025em;margin-bottom:18px}
-  h2{font-size:32px;margin-bottom:14px}
-  h3{font-size:22px;margin-bottom:8px}
-  h4{font-size:17px;font-weight:600;margin-bottom:6px}
-  p{margin-bottom:14px;color:var(--white)}
-  .lead{font-size:18px;color:var(--muted);max-width:640px;line-height:1.55}
-  .mono{font-family:'Satoshi',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:11px;font-weight:500}
-  .lime{color:var(--lime)}
-  .muted{color:var(--muted)}
-  strong{color:var(--white);font-weight:600}
+  body{background:var(--bg);color:var(--white);font-family:'Satoshi',sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:
+    radial-gradient(circle at 18% 10%,rgba(200,240,96,.11),transparent 26%),
+    radial-gradient(circle at 82% 36%,rgba(244,244,239,.055),transparent 28%),
+    linear-gradient(180deg,rgba(255,255,255,.035),transparent 240px);opacity:.8;z-index:-2}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,rgba(0,0,0,.7),transparent 62%);z-index:-1}
+  .wrap{max-width:780px;margin:0 auto;padding:60px 30px 84px}
+  .mono{font-family:'Satoshi',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:500}
+  h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+  p{color:#d9d9d4}
+  p+p{margin-top:11px}
 
   /* HEADER */
-  header{padding-bottom:64px;border-bottom:1px solid var(--line);margin-bottom:64px}
-  .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:36px;color:var(--muted)}
-  .eyebrow .dot{width:7px;height:7px;background:var(--lime);border-radius:50%}
-  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:42px;padding-top:28px;border-top:1px solid var(--line)}
-  .meta-grid .label{color:var(--muted2);margin-bottom:4px}
-  .meta-grid .value{color:var(--white);font-weight:500}
+  header{border-bottom:1px solid var(--line);padding-bottom:30px;margin-bottom:44px;position:relative}
+  header::after{content:"";position:absolute;left:0;bottom:-1px;width:120px;height:1px;background:var(--lime);box-shadow:0 0 22px rgba(200,240,96,.5)}
+  header .eyebrow{color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  header .eyebrow .dot{width:6px;height:6px;background:var(--lime);border-radius:50%;box-shadow:0 0 10px rgba(200,240,96,.6)}
+  header h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:16px}
+  header h1 .acc{color:var(--lime)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 26px;color:var(--muted);font-size:12.5px;margin-top:18px}
+  .meta b{color:var(--white);font-weight:500}
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 32px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  .meta-grid .k{color:var(--muted2);font-family:'Satoshi',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10px;margin-bottom:3px}
+  .meta-grid .v{color:var(--white);font-size:13px;font-weight:500}
 
   /* SECTIONS */
-  section{padding:56px 0;border-bottom:1px solid var(--line)}
-  section:last-of-type{border-bottom:none}
-  .section-num{font-family:'Clash Display',sans-serif;color:var(--lime);font-size:14px;letter-spacing:.1em;margin-bottom:18px;font-weight:500}
+  section{margin-bottom:54px}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .lbl{color:var(--lime);margin-bottom:16px}
+  h2{font-size:22px;margin-bottom:14px}
+  .sec-lead{color:var(--muted);font-size:14px;margin-bottom:24px;max-width:600px;line-height:1.55}
+  .ar{color:var(--lime);font-weight:700;margin:0 3px}
 
-  /* PHILOSOPHY */
-  .quote-block{
-    border-left:2px solid var(--lime);
-    padding:6px 0 6px 22px;
-    margin:24px 0 8px;
-    font-size:17px;
-    color:var(--white);
-  }
+  /* PHILOSOPHY QUOTE */
+  .quote{border-left:2px solid var(--lime);padding:4px 0 4px 20px;margin:20px 0;font-size:14.5px;color:var(--white);line-height:1.6;box-shadow:-22px 0 22px -22px rgba(200,240,96,.4)}
 
-  /* BUNDLE CARDS */
-  .bundles{display:grid;grid-template-columns:1fr;gap:18px;margin-top:30px}
-  @media (min-width:760px){.bundles{grid-template-columns:1fr 1fr 1fr;gap:14px}}
-  .bundle{
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:28px 22px 26px;
-    border-radius:0;
-    display:flex;flex-direction:column;
-    position:relative;
-  }
-  .bundle.featured{
-    background:var(--card-hi);
-    border:1px solid var(--lime);
-  }
-  .bundle .tag{
-    position:absolute;top:-11px;left:18px;
-    background:var(--lime);color:var(--bg);
-    font-family:'Satoshi',sans-serif;font-size:10px;font-weight:700;
-    letter-spacing:.14em;text-transform:uppercase;
-    padding:5px 9px;
-  }
-  .bundle .b-num{font-family:'Clash Display',sans-serif;color:var(--muted);font-size:13px;margin-bottom:4px;font-weight:500}
-  .bundle.featured .b-num{color:var(--lime)}
-  .bundle h3{margin-bottom:4px;font-size:24px}
-  .bundle .target{color:var(--muted);font-size:13px;margin-bottom:18px;min-height:34px}
-  .bundle ul{list-style:none;padding:0;margin:0 0 22px;font-size:14px;color:var(--white);flex-grow:1}
-  .bundle ul li{padding:7px 0;border-top:1px solid var(--line);color:var(--muted)}
-  .bundle ul li:first-child{border-top:none}
-  .bundle ul li strong{color:var(--white);font-weight:500;display:block;margin-bottom:2px;font-size:14px}
-  .bundle .price-block{padding-top:18px;border-top:1px solid var(--line)}
-  .bundle.featured .price-block{border-top:1px solid var(--line-hi)}
-  .bundle .price-original{
-    color:var(--muted2);font-size:13px;
-    text-decoration:line-through;
-    margin-bottom:2px;
-  }
-  .bundle .price{font-family:'Clash Display',sans-serif;font-size:34px;font-weight:600;letter-spacing:-.02em;color:var(--white);line-height:1}
-  .bundle.featured .price{color:var(--lime)}
-  .bundle .saving{color:var(--lime);font-size:12px;font-weight:500;margin-top:6px;letter-spacing:.04em}
+  /* BUNDLES (OPTIONS) */
+  .opts{display:grid;gap:14px;grid-template-columns:1fr;margin-top:22px}
+  @media(min-width:720px){.opts{grid-template-columns:repeat(3,1fr)}}
+  .opt{border:1px solid var(--line);border-radius:14px;padding:24px 20px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(22,22,26,.96));position:relative;display:flex;flex-direction:column;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .opt:hover{transform:translateY(-3px);border-color:rgba(244,244,239,.18);box-shadow:0 20px 52px rgba(0,0,0,.24)}
+  .opt.best{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime),0 0 32px rgba(200,240,96,.10)}
+  .opt .tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--lime);color:#0d0d0f;font-family:'Satoshi',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .opt h3{font-size:18px;margin-bottom:6px}
+  .opt.best h3{color:var(--lime)}
+  .opt .target{color:var(--muted);font-size:12px;margin-bottom:16px;min-height:34px;line-height:1.45}
+  .opt ul{list-style:none;margin-bottom:18px}
+  .opt li{font-size:12.5px;color:#d2d2cd;padding-left:18px;position:relative;line-height:1.45;margin-bottom:11px}
+  .opt li:last-child{margin-bottom:0}
+  .opt li::before{content:"+";position:absolute;left:0;top:0;color:var(--lime);font-weight:700}
+  .opt li b{color:var(--white);font-weight:500;display:block;margin-bottom:1px;font-size:13px}
+  .price{margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+  .price .was{color:var(--muted2);text-decoration:line-through;font-size:12px;margin-right:6px}
+  .price .now{font-family:'Clash Display',sans-serif;font-size:25px;font-weight:700;color:var(--white)}
+  .opt.best .now{color:var(--lime)}
+  .price .save{display:inline-block;font-family:'Satoshi',monospace;font-size:10px;font-weight:700;color:var(--lime);background:rgba(200,240,96,.12);border:1px solid rgba(200,240,96,.30);padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle}
 
-  /* À-LA-CARTE BLOCKS */
-  .block{margin-top:34px}
-  .block-header{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
-  .block-header .num{
-    font-family:'Clash Display',sans-serif;
-    color:var(--lime);font-size:14px;font-weight:500;
-    letter-spacing:.06em;min-width:24px;
-  }
-  .block-intro{color:var(--muted);font-size:15px;margin:0 0 22px;max-width:640px;line-height:1.55}
+  /* A-LA-CARTE BLOCKS */
+  .block{margin-top:32px}
+  .block:first-child{margin-top:18px}
+  .dlbl{font-family:'Satoshi',monospace;letter-spacing:.16em;text-transform:uppercase;font-size:10px;color:var(--lime);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .dlbl .n{color:var(--muted2)}
+  .block h3{font-size:17px;margin-bottom:8px}
+  .block-intro{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.55;max-width:620px}
 
-  .item{
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:22px 24px;
-    margin-bottom:10px;
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:18px;
-    align-items:start;
-  }
-  .item-body h4{margin-bottom:6px}
-  .item-body p{font-size:14px;color:var(--muted);margin-bottom:0;line-height:1.55}
-  .item-price{
-    font-family:'Clash Display',sans-serif;
-    font-size:22px;font-weight:600;
-    color:var(--lime);
-    white-space:nowrap;
-    letter-spacing:-.01em;
-    line-height:1.2;
-    text-align:right;
-  }
-  .item-price small{display:block;font-size:11px;color:var(--muted);font-family:'Satoshi',sans-serif;letter-spacing:.04em;font-weight:400;margin-top:2px;text-transform:lowercase}
-
-  .tier-group{margin-bottom:14px}
-  .tier-group .tier-label{color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:18px 0 8px;font-weight:500}
+  .mod{border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:10px;background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(20,20,23,.96));transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .mod:hover{transform:translateY(-2px);border-color:rgba(200,240,96,.28);box-shadow:0 18px 46px rgba(0,0,0,.22)}
+  .mod-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .mod-top h4{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;color:var(--white)}
+  .mod-price{font-family:'Clash Display',sans-serif;color:var(--lime);font-size:16px;font-weight:600;white-space:nowrap;text-align:right}
+  .mod-price small{display:block;font-family:'Satoshi',sans-serif;font-size:10px;letter-spacing:.04em;color:var(--muted);font-weight:400;text-transform:lowercase;margin-top:1px}
+  .mod p{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.55}
 
   /* TERMS */
-  .terms{background:var(--bg2);padding:32px 30px;border:1px solid var(--line);margin-top:24px}
-  .terms h4{margin-bottom:14px;color:var(--white)}
-  .terms ul{list-style:none;padding:0}
-  .terms li{
-    padding:10px 0;
-    border-top:1px solid var(--line);
-    font-size:14px;color:var(--white);
-    display:grid;grid-template-columns:140px 1fr;gap:18px;
-    align-items:start;
-  }
-  .terms li:first-child{border-top:none}
-  .terms li .k{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;padding-top:1px}
+  .terms-list{display:grid;gap:0;border-top:1px solid var(--line);margin-top:16px}
+  .terms-list .row{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+  .terms-list .k{font-family:'Satoshi',monospace;letter-spacing:.12em;text-transform:uppercase;font-size:10px;color:var(--lime);padding-top:2px}
+  .terms-list .v{font-size:13px;color:#d2d2cd;line-height:1.55}
 
-  /* FOOTER */
-  footer{
-    margin-top:72px;padding-top:32px;border-top:1px solid var(--line);
-    display:flex;justify-content:space-between;align-items:baseline;
-    color:var(--muted);font-size:13px;flex-wrap:wrap;gap:14px;
-  }
-  footer .sig{color:var(--white);font-family:'Clash Display',sans-serif;font-size:15px;font-weight:500}
+  /* CTA */
+  .cta{border:1px solid rgba(200,240,96,.34);border-radius:16px;margin-top:56px;padding:34px 34px 30px;text-align:center;background:linear-gradient(180deg,rgba(200,240,96,.12),rgba(20,20,23,.92));box-shadow:0 0 0 1px rgba(200,240,96,.08),0 18px 60px rgba(0,0,0,.28);position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent 0%,rgba(200,240,96,.16) 42%,transparent 68%);transform:translateX(-100%);animation:sheen 6s ease-in-out infinite;pointer-events:none}
+  .cta>*{position:relative}
+  .cta .eyebrow{color:var(--lime);margin-bottom:12px}
+  .cta h2{font-size:clamp(22px,3.6vw,30px);max-width:560px;margin:0 auto 14px}
+  .cta p{color:#d9d9d4;font-size:13.5px;margin-bottom:22px;max-width:530px;margin-left:auto;margin-right:auto}
+  .cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0 28px}
+  .cta-actions a{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:12.5px;font-weight:700;transition:transform .2s ease,box-shadow .2s ease}
+  .cta-actions .primary{background:var(--lime);color:#0d0d0f}
+  .cta-actions .primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(200,240,96,.22)}
+  .cta-actions .secondary{border:1px solid rgba(244,244,239,.22);color:var(--white);background:rgba(255,255,255,.04)}
+  .cta-actions .secondary:hover{transform:translateY(-1px);border-color:rgba(244,244,239,.4)}
+  .sign{display:inline-flex;flex-direction:column;align-items:center;gap:2px;border-top:1px solid rgba(244,244,239,.12);padding-top:22px;width:100%}
+  .sign .nm{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:600}
+  .sign .rl{color:var(--lime);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-family:'Satoshi',monospace;font-weight:500}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:12px}
+  .contact-links a{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--white);text-decoration:none;font-size:12px;background:var(--bg2);transition:border-color .2s ease,color .2s ease}
+  .contact-links a:hover{border-color:rgba(200,240,96,.55);color:var(--lime)}
+  .contact-links svg{width:13px;height:13px;fill:currentColor;flex:0 0 auto}
 
-  /* MOBILE */
+  @keyframes sheen{0%,55%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+
   @media (max-width:680px){
-    .wrap{padding:42px 20px 60px}
-    h1{font-size:38px}
-    h2{font-size:26px}
-    .meta-grid{grid-template-columns:1fr;gap:18px}
-    .item{grid-template-columns:1fr;gap:10px}
-    .item-price{text-align:left}
-    .terms li{grid-template-columns:1fr;gap:2px}
-    .terms li .k{font-size:11px}
+    .wrap{padding:42px 22px 60px}
+    .meta-grid{grid-template-columns:1fr}
+    .terms-list .row{grid-template-columns:1fr;gap:4px}
+    .terms-list .k{font-size:9.5px}
+    .mod-top{align-items:flex-start}
+    .mod-price{text-align:left}
   }
 
-  /* PRINT */
   @media print{
-    body{background:#fff;color:#111}
-    .wrap{padding:24px}
-    section{break-inside:avoid;border-color:#ddd}
-    .bundle,.item,.terms{background:#fafafa;border-color:#ddd;color:#111}
-    .item-body p,.muted,.lead,.bundle .target,.bundle ul li,.terms li .k{color:#555}
-    h1,h2,h3,h4,strong{color:#111}
-    .lime,.bundle .price,.bundle.featured .price,.item-price,.section-num,.block-header .num,.bundle.featured .b-num{color:#5a8020}
-    .bundle.featured{border-color:#5a8020}
+    @page{size:A4;margin:16mm 15mm;background:#0d0d0f}
+    body{background:#0d0d0f}
+    body::before,body::after{display:none}
+    .reveal{opacity:1;transform:none}
+    .opt:hover,.mod:hover{transform:none}
+    .cta::before{display:none}
+    section,.cta,.opt,.mod{break-inside:avoid}
   }
 </style>
 </head>
@@ -200,413 +149,342 @@
 
 <!-- HEADER -->
 <header>
-  <div class="eyebrow mono">
-    <span class="dot"></span>
-    <span>Listino servizi · v1.0 · Riservato</span>
-  </div>
-  <h1>Listino servizi<br>CRM &amp; Automation</h1>
-  <p class="lead">Pacchetti e voci à-la-carte per implementare, mantenere e far evolvere CRM (GoHighLevel) e flussi di automation. Documento di riferimento per la nostra collaborazione.</p>
-
-  <div class="meta-grid mono">
+  <div class="eyebrow mono"><span class="dot"></span> Listino servizi · v1.0 · Riservato</div>
+  <h1>Listino servizi <span class="acc">CRM &amp; Automation</span></h1>
+  <p style="color:#d9d9d4;font-size:14.5px;max-width:600px;margin-top:10px">Pacchetti e voci à-la-carte per implementare, mantenere e far evolvere CRM (GoHighLevel) e flussi di automation. Documento di riferimento per la nostra collaborazione.</p>
+  <div class="meta-grid">
     <div>
-      <div class="label">Fornitore</div>
-      <div class="value">Gabriele Fiorani, P.IVA</div>
+      <div class="k">Fornitore</div>
+      <div class="v">Gabriele Fiorani, P.IVA</div>
     </div>
     <div>
-      <div class="label">Destinatario</div>
-      <div class="value">Michele Petrera, Not An Agency S.r.l.</div>
+      <div class="k">Destinatario</div>
+      <div class="v">Michele Petrera, Not An Agency S.r.l.</div>
     </div>
     <div>
-      <div class="label">Validità</div>
-      <div class="value">12 mesi dalla data</div>
+      <div class="k">Validità</div>
+      <div class="v">12 mesi dalla data</div>
     </div>
     <div>
-      <div class="label">Regime fiscale</div>
-      <div class="value">Forfettario, esente IVA</div>
+      <div class="k">Regime fiscale</div>
+      <div class="v">Forfettario, esente IVA</div>
     </div>
   </div>
 </header>
 
-<!-- PHILOSOPHY -->
-<section id="filosofia">
-  <div class="section-num">01 — METODO</div>
+<!-- METODO -->
+<section>
+  <div class="lbl mono">// Il metodo</div>
   <h2>Prima i processi, poi il CRM.</h2>
-  <p class="lead">La maggior parte dei progetti CRM si pianta prima ancora di partire. Non è quasi mai colpa dello strumento. Il problema sta nei processi del cliente, che spesso non sono mai stati mappati davvero.</p>
+  <p>La maggior parte dei progetti CRM si pianta prima ancora di partire. Non è quasi mai colpa dello strumento. Il problema sta nei processi del cliente, che spesso non sono mai stati mappati davvero.</p>
 
-  <div class="quote-block">
+  <div class="quote">
     Prima di toccare il CRM, mappiamo i processi del cliente: come arrivano i lead, chi li gestisce, dove si perdono, cosa ha senso automatizzare e cosa no. Solo dopo si configura. La differenza fra un CRM che il cliente usa davvero e uno che abbandona dopo tre mesi sta quasi sempre qui.
   </div>
 
-  <p style="margin-top:20px">Ogni progetto parte quindi dalla <strong class="lime">Discovery</strong>, sempre. Quando viene fatta bene la fase tecnica scorre, il cliente è più allineato, i tempi di go-live si accorciano. Quando viene saltata, si paga dopo, con gli interessi.</p>
+  <p>Ogni progetto parte quindi dalla <b style="color:var(--lime);font-weight:500">Discovery</b>, sempre. Quando viene fatta bene la fase tecnica scorre, il cliente è più allineato, i tempi di go-live si accorciano. Quando viene saltata, si paga dopo, con gli interessi.</p>
 </section>
 
 <!-- BUNDLES -->
-<section id="bundle">
-  <div class="section-num">02 — PROGETTI CHIAVI-IN-MANO</div>
-  <h2>Tre pacchetti completi.</h2>
-  <p class="lead">Setup CRM end-to-end in una voce sola: Discovery, Implementazione e Onboarding del cliente, con uno sconto rispetto a prenderli separati. Lo scope è definito a monte, quindi sono pacchetti vendibili come prodotti finiti.</p>
+<section>
+  <div class="lbl mono">// I tre pacchetti</div>
+  <h2>Setup chiavi-in-mano.</h2>
+  <p class="sec-lead">Setup CRM end-to-end in una voce sola: Discovery, Implementazione e Onboarding del cliente, con uno sconto rispetto a prenderli separati. Lo scope è definito a monte, quindi sono pacchetti vendibili come prodotti finiti.</p>
 
-  <div class="bundles">
+  <div class="opts">
 
-    <!-- BUNDLE 1 -->
-    <div class="bundle">
-      <div class="b-num">Pacchetto 01</div>
+    <div class="opt">
       <h3>Foundation</h3>
       <div class="target">PMI piccola con un processo commerciale lineare. 1 pipeline, team ridotto.</div>
       <ul>
-        <li><strong>Discovery Light</strong>Mappatura 1 processo e documento per il cliente</li>
-        <li><strong>Implementation Starter</strong>1 pipeline, 3 o 4 workflow base, tag e custom field</li>
-        <li><strong>Onboarding Light</strong>Kick-off, 1 iterazione doc, 1 training</li>
+        <li><b>Discovery Light</b>Mappatura 1 processo e documento cliente</li>
+        <li><b>Implementation Starter</b>1 pipeline, 3 o 4 workflow base</li>
+        <li><b>Onboarding Light</b>Kick-off, iterazione doc, 1 training</li>
       </ul>
-      <div class="price-block">
-        <div class="price-original">1.800 €</div>
-        <div class="price">1.497 €</div>
-        <div class="saving">Risparmio: 303 €</div>
+      <div class="price">
+        <span class="was">€1.800</span><span class="now">€1.497</span><span class="save">−17%</span>
       </div>
     </div>
 
-    <!-- BUNDLE 2 - FEATURED -->
-    <div class="bundle featured">
-      <div class="tag">Più richiesto</div>
-      <div class="b-num">Pacchetto 02</div>
+    <div class="opt best">
+      <div class="tag">Consigliato</div>
       <h3>Business</h3>
       <div class="target">PMI con processo strutturato e più segmenti commerciali. Il caso più comune.</div>
       <ul>
-        <li><strong>Discovery Standard</strong>2 o 3 pipeline, mappatura completa, doc cliente con 1 iterazione</li>
-        <li><strong>Implementation Standard</strong>2 o 3 pipeline, 6 a 8 workflow, calendar, form, template email</li>
-        <li><strong>Onboarding Completo</strong>Kick-off, 2 o 3 iterazioni doc, training multi-utente</li>
+        <li><b>Discovery Standard</b>2 o 3 pipeline, mappatura completa, doc con revisione</li>
+        <li><b>Implementation Standard</b>2 o 3 pipeline, 6 a 8 workflow, calendar, form, email</li>
+        <li><b>Onboarding Completo</b>Kick-off, 2 o 3 iterazioni, training multi-utente</li>
       </ul>
-      <div class="price-block">
-        <div class="price-original">3.500 €</div>
-        <div class="price">2.797 €</div>
-        <div class="saving">Risparmio: 703 €</div>
+      <div class="price">
+        <span class="was">€3.500</span><span class="now">€2.797</span><span class="save">−20%</span>
       </div>
     </div>
 
-    <!-- BUNDLE 3 -->
-    <div class="bundle">
-      <div class="b-num">Pacchetto 03</div>
+    <div class="opt">
       <h3>Premium</h3>
       <div class="target">Multi-pipeline, scenari complessi (hospitality, multi-reparto, integrazioni custom).</div>
       <ul>
-        <li><strong>Discovery Advanced</strong>4 o più pipeline, multi-stakeholder, processi complessi</li>
-        <li><strong>Implementation Advanced</strong>4 o più pipeline, 9 o più workflow, Service Calendars, integrazioni base</li>
-        <li><strong>Onboarding Completo</strong>Kick-off, iterazioni doc, training multi-utente</li>
+        <li><b>Discovery Advanced</b>4 o più pipeline, multi-stakeholder</li>
+        <li><b>Implementation Advanced</b>4 o più pipeline, 9 o più workflow, Service Calendars</li>
+        <li><b>Onboarding Completo</b>Kick-off, iterazioni, training multi-utente</li>
       </ul>
-      <div class="price-block">
-        <div class="price-original">5.300 €</div>
-        <div class="price">3.897 €</div>
-        <div class="saving">Risparmio: 1.403 €</div>
+      <div class="price">
+        <span class="was">€5.300</span><span class="now">€3.897</span><span class="save">−26%</span>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- A LA CARTE -->
-<section id="listino">
-  <div class="section-num">03 — LISTINO À-LA-CARTE</div>
+<!-- LISTINO A LA CARTE -->
+<section>
+  <div class="lbl mono">// Listino à-la-carte</div>
   <h2>Voci singole.</h2>
-  <p class="lead">Per progetti che non rientrano in un bundle, per integrazioni custom, manutenzione o consulenza. Si combinano fra loro secondo il bisogno.</p>
+  <p class="sec-lead">Per progetti che non rientrano in un bundle, per integrazioni custom, manutenzione o consulenza. Si combinano fra loro secondo il bisogno.</p>
 
-  <!-- BLOCK 1 - DISCOVERY -->
+  <!-- BLOCK 1 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">01</div>
-      <h3>Discovery &amp; Process Mapping</h3>
-    </div>
-    <p class="block-intro">Fase di analisi prima della parte tecnica. Si parte dalla mappatura dei processi attuali del cliente, si decide cosa automatizzare e cosa no, si disegnano pipeline e stage. Esce un documento per il cliente che diventa la specifica del progetto e prerequisito di tutto quello che viene dopo.</p>
+    <div class="dlbl"><span class="n">01</span> Discovery &amp; Process Mapping</div>
+    <p class="block-intro">Analisi prima della parte tecnica. Si parte dalla mappatura dei processi attuali del cliente, si decide cosa automatizzare e cosa no, si disegnano pipeline e stage. Esce un documento per il cliente che diventa la specifica del progetto e prerequisito di tutto quello che viene dopo.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Discovery Light</h4>
-        <p>Per realtà con un processo commerciale lineare e un solo segmento. Kick-off, mappatura del flusso lead-to-close attuale, definizione di una pipeline con stage, identificazione dei punti di automazione principali, documento sintetico di 3 o 5 pagine.</p>
-      </div>
-      <div class="item-price">450 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Discovery Light</h4><div class="mod-price">€450</div></div>
+      <p>Per realtà con un processo commerciale lineare e un solo segmento. Kick-off, mappatura del flusso lead-to-close attuale, definizione di una pipeline con stage, identificazione dei punti di automazione principali, documento sintetico di 3 o 5 pagine.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Discovery Standard</h4>
-        <p>Per PMI con più segmenti o canali di acquisizione. Kick-off, mappatura completa di 2 o 3 processi paralleli, definizione di pipeline con stage e tag system, identificazione di trigger e workflow, sistema di custom field, documento cliente con 1 ciclo di revisione, 8 a 12 pagine.</p>
-      </div>
-      <div class="item-price">900 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Discovery Standard</h4><div class="mod-price">€900</div></div>
+      <p>Per PMI con più segmenti o canali di acquisizione. Kick-off, mappatura completa di 2 o 3 processi paralleli, definizione di pipeline con stage e tag system, identificazione di trigger e workflow, sistema di custom field, documento cliente con 1 ciclo di revisione, 8 a 12 pagine.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Discovery Advanced</h4>
-        <p>Per scenari complessi: 4 o più pipeline parallele, multi-stakeholder, processi che attraversano reparti (esempio hospitality con camere, eventi, matrimoni, oppure B2B con commerciale, operations, finance). Include più sessioni di scoperta, mapping degli handoff fra team, definizione di smart tag, documento cliente strutturato con tabelle pipeline per attore, 15 o più pagine.</p>
-      </div>
-      <div class="item-price">1.600 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Discovery Advanced</h4><div class="mod-price">€1.600</div></div>
+      <p>Per scenari complessi: 4 o più pipeline parallele, multi-stakeholder, processi che attraversano reparti (esempio hospitality con camere, eventi, matrimoni, oppure B2B con commerciale, operations, finance). Include più sessioni di scoperta, mapping degli handoff fra team, definizione di smart tag, documento cliente strutturato con tabelle pipeline per attore, 15 o più pagine.</p>
     </div>
   </div>
 
-  <!-- BLOCK 2 - IMPLEMENTATION -->
+  <!-- BLOCK 2 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">02</div>
-      <h3>CRM Implementation</h3>
-    </div>
+    <div class="dlbl"><span class="n">02</span> CRM Implementation</div>
     <p class="block-intro">Configurazione tecnica del sub-account GoHighLevel: pipeline, workflow, calendar, form, template email, tag e custom field. Tutti i tier includono il setup del sub-account, la configurazione DNS del sending domain (SPF, DKIM, tracking), il documento workflow per il cliente e un ciclo di revisione.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Implementation Starter</h4>
-        <p>Setup base per un singolo processo commerciale. Una pipeline configurata, 3 o 4 workflow base (esempio: nuovo lead, follow-up preventivo, chiuso vinto, chiuso perso), tag e custom field, template email essenziali. Nessuna integrazione esterna.</p>
-      </div>
-      <div class="item-price">950 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Implementation Starter</h4><div class="mod-price">€950</div></div>
+      <p>Setup base per un singolo processo commerciale. Una pipeline configurata, 3 o 4 workflow base (esempio nuovo lead, follow-up preventivo, chiuso vinto, chiuso perso), tag e custom field, template email essenziali. Nessuna integrazione esterna.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Implementation Standard</h4>
-        <p>Setup multi-processo. 2 o 3 pipeline configurate, 6 a 8 workflow (onboarding lead, nurture, alert pre-scadenza, handoff fra team, follow-up automatici), calendar setup base, 1 o 2 form custom, template email completi, sistema tag e custom field strutturato.</p>
-      </div>
-      <div class="item-price">1.800 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Implementation Standard</h4><div class="mod-price">€1.800</div></div>
+      <p>Setup multi-processo. 2 o 3 pipeline configurate, 6 a 8 workflow (onboarding lead, nurture, alert pre-scadenza, handoff fra team, follow-up automatici), calendar setup base, 1 o 2 form custom, template email completi, sistema tag e custom field strutturato.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Implementation Advanced</h4>
-        <p>Setup complesso multi-pipeline. 4 o più pipeline configurate, 9 o più workflow con logiche condizionali e proxy tag, Service Calendars (gestione unit e risorse multiple), form custom con logica, gestione handoff multi-reparto via email, integrazioni base (parser email inbound o webhook). Configurazione tipica del progetto Villa Ghiringhelli o Serra Storta.</p>
-      </div>
-      <div class="item-price">2.900 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Implementation Advanced</h4><div class="mod-price">€2.900</div></div>
+      <p>Setup complesso multi-pipeline. 4 o più pipeline configurate, 9 o più workflow con logiche condizionali e proxy tag, Service Calendars (gestione unit e risorse multiple), form custom con logica, gestione handoff multi-reparto via email, integrazioni base (parser email inbound o webhook). Configurazione tipica del progetto Villa Ghiringhelli o Serra Storta.</p>
     </div>
   </div>
 
-  <!-- BLOCK 3 - ADD-ON -->
+  <!-- BLOCK 3 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">03</div>
-      <h3>Add-on tecnici</h3>
-    </div>
+    <div class="dlbl"><span class="n">03</span> Add-on tecnici</div>
     <p class="block-intro">Voci a unità da aggiungere a un'implementazione o a un retainer attivo quando il cliente chiede funzionalità fuori dallo scope base.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Workflow custom singolo</h4>
-        <p>Costruzione di un workflow aggiuntivo oltre quelli inclusi nel pacchetto base. Include logica di trigger, condizioni, azioni in sequenza, gestione errori, documentazione.</p>
-      </div>
-      <div class="item-price">180 a 250 €<small>a complessità</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Workflow custom singolo</h4><div class="mod-price">€180 a 250<small>a complessità</small></div></div>
+      <p>Costruzione di un workflow aggiuntivo oltre quelli inclusi nel pacchetto base. Include logica di trigger, condizioni, azioni in sequenza, gestione errori, documentazione.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Integrazione esterna</h4>
-        <p>Bridge fra GHL e tool esterno via Make, Zapier o webhook diretto. Tipicamente sync con gestionale, CRM legacy, software verticale (booking, gestione progetti, fatturazione). Include scenario design, mapping campi e testing end-to-end.</p>
-      </div>
-      <div class="item-price">350 a 500 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Integrazione esterna</h4><div class="mod-price">€350 a 500</div></div>
+      <p>Bridge fra GHL e tool esterno via Make, Zapier o webhook diretto. Tipicamente sync con gestionale, CRM legacy, software verticale (booking, gestione progetti, fatturazione). Include scenario design, mapping campi e testing end-to-end.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>WhatsApp Business API setup</h4>
-        <p>Configurazione completa WhatsApp Business API: scelta provider (Meta direct o BSP), registrazione numero dedicato, opt-in flow, primi template messaggi approvati. Esclude costi piattaforma e fee Meta a carico del cliente.</p>
-      </div>
-      <div class="item-price">400 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>WhatsApp Business API setup</h4><div class="mod-price">€400</div></div>
+      <p>Configurazione completa WhatsApp Business API: scelta provider (Meta direct o BSP), registrazione numero dedicato, opt-in flow, primi template messaggi approvati. Esclude costi piattaforma e fee Meta a carico del cliente.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Parser email inbound</h4>
-        <p>Setup di un parser per estrarre dati da email automatiche di piattaforme terze (esempio Booking, Expedia, Matrimonio.com, form di terzi) e creare automaticamente opportunity nel CRM con i campi popolati. Un parser corrisponde a una sorgente.</p>
-      </div>
-      <div class="item-price">280 €<small>a parser</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Parser email inbound</h4><div class="mod-price">€280<small>a parser</small></div></div>
+      <p>Setup di un parser per estrarre dati da email automatiche di piattaforme terze (esempio Booking, Expedia, Matrimonio.com, form di terzi) e creare automaticamente opportunity nel CRM con i campi popolati. Un parser corrisponde a una sorgente.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Form custom con logica condizionale</h4>
-        <p>Form GHL con campi condizionali, branching logic, validazione, mapping a custom field, integrazione con workflow di gestione lead.</p>
-      </div>
-      <div class="item-price">130 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Form custom con logica condizionale</h4><div class="mod-price">€130</div></div>
+      <p>Form GHL con campi condizionali, branching logic, validazione, mapping a custom field, integrazione con workflow di gestione lead.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Calendar setup</h4>
-        <p>Configurazione di un gruppo calendari (esempio servizio prenotazione consulenze, gestione risorse multiple). Include orari, disponibilità, regole booking, conferma automatica, reminder pre-appuntamento.</p>
-      </div>
-      <div class="item-price">180 €<small>per gruppo</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Calendar setup</h4><div class="mod-price">€180<small>per gruppo</small></div></div>
+      <p>Configurazione di un gruppo calendari (esempio servizio prenotazione consulenze, gestione risorse multiple). Include orari, disponibilità, regole booking, conferma automatica, reminder pre-appuntamento.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Migrazione contatti da CRM esterno</h4>
-        <p>Export, pulizia, mapping custom field e import in GHL di una base contatti esistente, fino a 5.000 contatti. Include deduplica, normalizzazione campi, gestione consensi GDPR. Sopra i 5.000 contatti valutiamo caso per caso.</p>
-      </div>
-      <div class="item-price">250 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Migrazione contatti da CRM esterno</h4><div class="mod-price">€250</div></div>
+      <p>Export, pulizia, mapping custom field e import in GHL di una base contatti esistente, fino a 5.000 contatti. Include deduplica, normalizzazione campi, gestione consensi GDPR. Sopra i 5.000 contatti valutiamo caso per caso.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Email signature &amp; snippets</h4>
-        <p>Setup firma email aziendale (HTML responsive) a livello utente e creazione di una libreria di snippet riutilizzabili nei workflow per i template ricorrenti.</p>
-      </div>
-      <div class="item-price">100 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Email signature &amp; snippets</h4><div class="mod-price">€100</div></div>
+      <p>Setup firma email aziendale (HTML responsive) a livello utente e creazione di una libreria di snippet riutilizzabili nei workflow per i template ricorrenti.</p>
     </div>
   </div>
 
-  <!-- BLOCK 4 - ONBOARDING -->
+  <!-- BLOCK 4 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">04</div>
-      <h3>Onboarding cliente &amp; training</h3>
-    </div>
+    <div class="dlbl"><span class="n">04</span> Onboarding cliente &amp; training</div>
     <p class="block-intro">Il pezzo di gestione del cliente finale: call, iterazioni del documento, formazione utenti, handover post-implementazione. Quello che fa la differenza fra un CRM usato davvero e uno che resta lì.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Onboarding Light</h4>
-        <p>Kick-off call con il cliente, 1 iterazione del documento di progetto sulla base del feedback, sessione di training utente singolo (90 minuti) post go-live. Adatto a clienti piccoli con un solo utilizzatore.</p>
-      </div>
-      <div class="item-price">400 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Onboarding Light</h4><div class="mod-price">€400</div></div>
+      <p>Kick-off call con il cliente, 1 iterazione del documento di progetto sulla base del feedback, sessione di training utente singolo (90 minuti) post go-live. Adatto a clienti piccoli con un solo utilizzatore.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Onboarding Completo</h4>
-        <p>Kick-off call, 2 o 3 iterazioni del documento di progetto, sessione di training multi-utente (fino a 3 persone, 2 ore), handover scritto con accessi e riferimenti. Per clienti con team strutturato.</p>
-      </div>
-      <div class="item-price">800 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Onboarding Completo</h4><div class="mod-price">€800</div></div>
+      <p>Kick-off call, 2 o 3 iterazioni del documento di progetto, sessione di training multi-utente (fino a 3 persone, 2 ore), handover scritto con accessi e riferimenti. Per clienti con team strutturato.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Training utente aggiuntivo</h4>
-        <p>Sessione formativa post go-live per un nuovo utente del CRM (90 minuti). Include walkthrough operativo, documentazione condivisa, Q&amp;A.</p>
-      </div>
-      <div class="item-price">150 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Training utente aggiuntivo</h4><div class="mod-price">€150</div></div>
+      <p>Sessione formativa post go-live per un nuovo utente del CRM (90 minuti). Include walkthrough operativo, documentazione condivisa, Q&amp;A.</p>
     </div>
   </div>
 
-  <!-- BLOCK 5 - RETAINER -->
+  <!-- BLOCK 5 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">05</div>
-      <h3>Manutenzione &amp; evolutiva</h3>
-    </div>
+    <div class="dlbl"><span class="n">05</span> Manutenzione &amp; evolutiva</div>
     <p class="block-intro">Per la gestione dei CRM una volta live. Scope definito in ore: piccole evolutive, fix, supporto operativo, monitoraggio. Le ore non consumate scadono il mese successivo. Tutto quello che esce dallo scope si quota a parte attingendo al blocco Add-on.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Retainer Light</h4>
-        <p>4 ore al mese di manutenzione e small fix. Monitoraggio workflow, correzione bug minori, piccoli aggiustamenti template, supporto via messaggio. Adatto a CRM stabili e a basso volume di richieste.</p>
-      </div>
-      <div class="item-price">220 €<small>al mese</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Retainer Light</h4><div class="mod-price">€220<small>al mese</small></div></div>
+      <p>4 ore al mese di manutenzione e small fix. Monitoraggio workflow, correzione bug minori, piccoli aggiustamenti template, supporto via messaggio. Adatto a CRM stabili e a basso volume di richieste.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Retainer Standard</h4>
-        <p>8 ore al mese: manutenzione più 1 o 2 piccole evolutive incrementali (esempio nuovo workflow, modifica pipeline, aggiunta template). È il livello base raccomandato per CRM live con uso quotidiano da parte del cliente.</p>
-      </div>
-      <div class="item-price">500 €<small>al mese</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Retainer Standard</h4><div class="mod-price">€500<small>al mese</small></div></div>
+      <p>8 ore al mese: manutenzione più 1 o 2 piccole evolutive incrementali (esempio nuovo workflow, modifica pipeline, aggiunta template). È il livello base raccomandato per CRM live con uso quotidiano da parte del cliente.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Retainer Pro</h4>
-        <p>16 ore al mese: presidio attivo, manutenzione, evolutive ricorrenti, reporting mensile sintetico sull'uso del CRM, sessioni di allineamento con il cliente. Adatto a clienti enterprise o in fase di crescita rapida.</p>
-      </div>
-      <div class="item-price">850 €<small>al mese</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Retainer Pro</h4><div class="mod-price">€850<small>al mese</small></div></div>
+      <p>16 ore al mese: presidio attivo, manutenzione, evolutive ricorrenti, reporting mensile sintetico sull'uso del CRM, sessioni di allineamento con il cliente. Adatto a clienti enterprise o in fase di crescita rapida.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Pay-per-ticket</h4>
-        <p>Tariffa oraria per richieste fuori retainer o per clienti senza pacchetto mensile attivo. Fatturazione a consuntivo con minimo fatturabile di 2 ore per intervento.</p>
-      </div>
-      <div class="item-price">40 €<small>all'ora, min 2h</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Pay-per-ticket</h4><div class="mod-price">€40<small>all'ora, min 2h</small></div></div>
+      <p>Tariffa oraria per richieste fuori retainer o per clienti senza pacchetto mensile attivo. Fatturazione a consuntivo con minimo fatturabile di 2 ore per intervento.</p>
     </div>
   </div>
 
-  <!-- BLOCK 6 - CONSULTING -->
+  <!-- BLOCK 6 -->
   <div class="block">
-    <div class="block-header">
-      <div class="num">06</div>
-      <h3>Consulenza standalone</h3>
-    </div>
+    <div class="dlbl"><span class="n">06</span> Consulenza standalone</div>
     <p class="block-intro">Voci per quando serve uno sguardo esterno fuori dal contesto di un progetto: audit di un CRM esistente, review strategica, sessione di lavoro su flussi e processi.</p>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Giornata di consulenza</h4>
-        <p>8 ore di lavoro consulenziale con deliverable scritto a fine giornata. Adatto a sessioni di approfondimento strategico, definizione di roadmap, analisi processi.</p>
-      </div>
-      <div class="item-price">300 €<small>a giornata</small></div>
+    <div class="mod">
+      <div class="mod-top"><h4>Giornata di consulenza</h4><div class="mod-price">€300<small>a giornata</small></div></div>
+      <p>8 ore di lavoro consulenziale con deliverable scritto a fine giornata. Adatto a sessioni di approfondimento strategico, definizione di roadmap, analisi processi.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Mezza giornata call strategica</h4>
-        <p>4 ore. Sessione di lavoro condivisa su uno specifico nodo (definizione pipeline, scelta integrazione, review architettura) con note di sintesi consegnate dopo.</p>
-      </div>
-      <div class="item-price">170 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Mezza giornata call strategica</h4><div class="mod-price">€170</div></div>
+      <p>4 ore. Sessione di lavoro condivisa su uno specifico nodo (definizione pipeline, scelta integrazione, review architettura) con note di sintesi consegnate dopo.</p>
     </div>
 
-    <div class="item">
-      <div class="item-body">
-        <h4>Audit CRM esistente</h4>
-        <p>Analisi di un sub-account GHL già attivo, proprio o di terzi: configurazione, workflow, deliverability, gestione contatti, utilizzo da parte del team. In uscita un report scritto con raccomandazioni operative prioritizzate.</p>
-      </div>
-      <div class="item-price">380 €</div>
+    <div class="mod">
+      <div class="mod-top"><h4>Audit CRM esistente</h4><div class="mod-price">€380</div></div>
+      <p>Analisi di un sub-account GHL già attivo, proprio o di terzi: configurazione, workflow, deliverability, gestione contatti, utilizzo da parte del team. In uscita un report scritto con raccomandazioni operative prioritizzate.</p>
     </div>
   </div>
 </section>
 
 <!-- TERMS -->
-<section id="termini">
-  <div class="section-num">04 — TERMINI OPERATIVI</div>
+<section>
+  <div class="lbl mono">// Termini operativi</div>
   <h2>Come lavoriamo.</h2>
-  <p class="lead">Note operative che valgono per qualsiasi voce del listino, salvo accordi specifici.</p>
+  <p class="sec-lead">Note operative che valgono per qualsiasi voce del listino, salvo accordi specifici.</p>
 
-  <div class="terms">
-    <ul>
-      <li>
-        <span class="k">Discovery</span>
-        <span>Ogni progetto parte dalla Discovery. Eccezione: quando viene fornito un mapping già strutturato, deve essere approvato congiuntamente.</span>
-      </li>
-      <li>
-        <span class="k">Pagamenti</span>
-        <span>Per i bundle: 50% all'avvio, 50% al go-live. Voci à-la-carte e add-on: a consegna. Retainer mensili: fatturazione anticipata a inizio mese.</span>
-      </li>
-      <li>
-        <span class="k">Tempi</span>
-        <span>Bundle Foundation: 2 o 3 settimane. Bundle Business: 4 o 5 settimane. Bundle Premium: 6 o 8 settimane. Soggetti ai tempi di feedback del cliente finale.</span>
-      </li>
-      <li>
-        <span class="k">Revisioni</span>
-        <span>Ogni progetto include i cicli di revisione indicati nel tier. Iterazioni aggiuntive si fatturano a 40 €/h (minimo 1h).</span>
-      </li>
-      <li>
-        <span class="k">Scope</span>
-        <span>Lo scope di ciascun pacchetto è definito al momento della Discovery. Modifiche o aggiunte successive rientrano nel blocco Add-on.</span>
-      </li>
-      <li>
-        <span class="k">Costi terzi</span>
-        <span>Licenze GHL, fee Meta e WhatsApp, costi Make o Zapier, hosting e DNS sono a carico del cliente finale, non inclusi nelle voci di listino.</span>
-      </li>
-      <li>
-        <span class="k">Fatturazione</span>
-        <span>Regime forfettario, esente IVA. Bollo di 2 € a carico del cliente.</span>
-      </li>
-      <li>
-        <span class="k">Adeguamento</span>
-        <span>Listino valido 12 mesi dalla data sopra indicata. Adeguamento annuale concordato in funzione di mercato e inflazione, comunicato con preavviso di 30 giorni.</span>
-      </li>
-    </ul>
+  <div class="terms-list">
+    <div class="row">
+      <div class="k">Discovery</div>
+      <div class="v">Ogni progetto parte dalla Discovery. Eccezione: quando viene fornito un mapping già strutturato, deve essere approvato congiuntamente.</div>
+    </div>
+    <div class="row">
+      <div class="k">Pagamenti</div>
+      <div class="v">Per i bundle: 50% all'avvio, 50% al go-live. Voci à-la-carte e add-on: a consegna. Retainer mensili: fatturazione anticipata a inizio mese.</div>
+    </div>
+    <div class="row">
+      <div class="k">Tempi</div>
+      <div class="v">Bundle Foundation: 2 o 3 settimane. Bundle Business: 4 o 5 settimane. Bundle Premium: 6 o 8 settimane. Soggetti ai tempi di feedback del cliente finale.</div>
+    </div>
+    <div class="row">
+      <div class="k">Revisioni</div>
+      <div class="v">Ogni progetto include i cicli di revisione indicati nel tier. Iterazioni aggiuntive si fatturano a €40/h (minimo 1h).</div>
+    </div>
+    <div class="row">
+      <div class="k">Scope</div>
+      <div class="v">Lo scope di ciascun pacchetto è definito al momento della Discovery. Modifiche o aggiunte successive rientrano nel blocco Add-on.</div>
+    </div>
+    <div class="row">
+      <div class="k">Costi terzi</div>
+      <div class="v">Licenze GHL, fee Meta e WhatsApp, costi Make o Zapier, hosting e DNS sono a carico del cliente finale, non inclusi nelle voci di listino.</div>
+    </div>
+    <div class="row">
+      <div class="k">Fatturazione</div>
+      <div class="v">Regime forfettario, esente IVA. Bollo di €2 a carico del cliente.</div>
+    </div>
+    <div class="row">
+      <div class="k">Adeguamento</div>
+      <div class="v">Listino valido 12 mesi dalla data sopra indicata. Adeguamento annuale concordato in funzione di mercato e inflazione, comunicato con preavviso di 30 giorni.</div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="sig">Gabriele Fiorani · Full Stack Marketer</div>
-  <div class="mono">v1.0 · riservato a Michele Petrera</div>
-</footer>
+<!-- CTA -->
+<div class="cta">
+  <div class="eyebrow mono">// Prossimo step</div>
+  <h2>Allineamoci sulle prossime quotazioni.</h2>
+  <p>Questo listino è il punto di partenza per le prossime implementazioni e per ridiscutere le attività già in corso. Quando vuoi sentiamoci per riallineare scope e tariffe.</p>
+  <div class="cta-actions">
+    <a class="primary" href="https://wa.me/393780949839?text=Ciao%20Michele%2C%20ho%20preparato%20il%20listino%20servizi%20CRM.%20Quando%20riusciamo%20a%20sentirci%20per%20allinearci%3F">Scrivimi su WhatsApp</a>
+    <a class="secondary" href="mailto:info@gabrielefiorani.it?subject=Listino%20servizi%20CRM">Mandami una mail</a>
+  </div>
+  <div class="sign">
+    <span class="nm">Gabriele Fiorani</span>
+    <span class="rl">Full Stack Marketer</span>
+    <div class="contact-links">
+      <a href="https://gabrielefiorani.it/">gabrielefiorani.it</a>
+      <a href="mailto:info@gabrielefiorani.it">info@gabrielefiorani.it</a>
+      <a href="tel:+393780949839">+39 378 094 9839</a>
+      <a href="https://it.linkedin.com/in/gabriele-fiorani">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.32 8.03h4.36V23H.32V8.03zM8.22 8.03h4.18v2.05h.06c.58-1.1 2-2.26 4.12-2.26 4.41 0 5.22 2.9 5.22 6.67V23h-4.35v-7.55c0-1.8-.03-4.12-2.51-4.12-2.52 0-2.9 1.97-2.9 3.99V23H8.22V8.03z"></path></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</div>
 
 </div>
+
+<script>
+  document.querySelectorAll('header, section, .cta').forEach((el) => el.classList.add('reveal'));
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+  }
+</script>
 
 </body>
 </html>
