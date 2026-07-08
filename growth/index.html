@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cos'è il Growth · Gabriele Fiorani</title>
+<meta name="description" content="Cos'è davvero il Growth e cosa lo differenzia da un marketer classico. Una guida chiara alla professione del Growth Marketer / Chief Growth Officer." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --accent:#d7ff3a;
+    --ink:#0a0a0a;
+    --ink-90:#1a1a1a;
+    --ink-70:#3d3d3d;
+    --ink-50:#6b6b6b;
+    --ink-30:#a8a8a8;
+    --ink-15:#d6d2c8;
+    --paper:#f4f2ed;
+    --paper-warm:#ebe8e1;
+    --paper-2:#e2ded4;
+    --rule:#c8c4ba;
+    --positive:#5e7355;
+    --coral:#ff8a8a;
+    --font-body:'Inter',-apple-system,system-ui,sans-serif;
+    --font-display:'Bricolage Grotesque','Inter',sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --ease-bounce:cubic-bezier(0.68,-0.4,0.265,1.4);
+    --gutter:clamp(20px,4vw,56px);
+    --s-2:8px;--s-3:12px;--s-4:16px;--s-6:24px;--s-8:32px;--s-10:40px;--s-12:48px;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+  /* ---------- continuous background grid ---------- */
+  .bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+    background-size:64px 64px;opacity:.20}
+
+  /* ---------- frame marks (corner delimiters, come il sito) ---------- */
+  .frame-mark{position:fixed;width:24px;height:24px;pointer-events:none;z-index:95;opacity:.85;mix-blend-mode:difference}
+  .frame-mark.tl{top:16px;left:16px;border-top:1.5px solid var(--paper);border-left:1.5px solid var(--paper)}
+  .frame-mark.tr{top:16px;right:16px;border-top:1.5px solid var(--paper);border-right:1.5px solid var(--paper)}
+  .frame-mark.bl{bottom:16px;left:16px;border-bottom:1.5px solid var(--paper);border-left:1.5px solid var(--paper)}
+  .frame-mark.br{bottom:16px;right:16px;border-bottom:1.5px solid var(--paper);border-right:1.5px solid var(--paper)}
+
+  /* ---------- typography ---------- */
+  h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.02;letter-spacing:-0.02em}
+  .mono{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-50)}
+  .hl{background:linear-gradient(180deg,transparent 60%,var(--accent) 60%);padding:0 .06em}
+
+  /* ---------- nav (stile sito) ---------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:var(--s-6) calc(var(--gutter) + 16px);
+       display:flex;justify-content:space-between;align-items:center;color:var(--ink);
+       transition:padding .3s var(--ease)}
+  .nav::before{content:'';position:absolute;inset:0;bottom:-64px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s var(--ease);
+       background:linear-gradient(to bottom,rgba(244,242,237,.95) 0%,rgba(244,242,237,.92) 30%,rgba(244,242,237,.78) 55%,rgba(244,242,237,.45) 75%,rgba(244,242,237,.18) 88%,rgba(244,242,237,0) 100%)}
+  .nav.is-scrolled{padding-top:var(--s-3);padding-bottom:var(--s-3)}
+  .nav.is-scrolled::before{opacity:1}
+  .nav__brand,.nav__links a,.nav__cta{color:var(--ink);transition:color .3s var(--ease);position:relative;z-index:1}
+  .nav.is-on-dark .nav__brand,.nav.is-on-dark .nav__links a,.nav.is-on-dark .nav__cta{color:var(--paper)}
+  .nav.is-on-dark::before{background:linear-gradient(to bottom,rgba(10,10,10,.92) 0%,rgba(10,10,10,.85) 30%,rgba(10,10,10,.65) 55%,rgba(10,10,10,.35) 75%,rgba(10,10,10,.12) 88%,rgba(10,10,10,0) 100%)}
+  .nav__brand{font-family:var(--font-display);font-size:15px;font-weight:500;letter-spacing:-0.005em;display:inline-flex;align-items:center;gap:var(--s-2)}
+  .nav__brand-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .nav__links{display:none;gap:var(--s-8);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;list-style:none}
+  .nav__links a span{opacity:.6;margin-right:4px}
+  .nav__links a::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+  .nav__links a:hover::after{transform:scaleX(1)}
+  .nav__cta{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;display:inline-flex;align-items:center;gap:var(--s-2)}
+  .nav__cta::after{content:'↗';font-size:13px;transition:transform .3s var(--ease);display:inline-block}
+  .nav__cta:hover::after{transform:translate(3px,-3px)}
+  @media(min-width:900px){.nav__links{display:flex}}
+
+  /* ---------- hero ---------- */
+  header{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:60px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:-1}
+  .blob.a{width:460px;height:460px;background:var(--accent);top:-150px;right:-110px;opacity:.42;animation:float 14s var(--ease) infinite alternate}
+  .blob.b{width:340px;height:340px;background:var(--positive);bottom:-140px;left:-100px;opacity:.18;animation:float 18s var(--ease) infinite alternate-reverse}
+  @keyframes float{to{transform:translate(-40px,40px) scale(1.12)}}
+  header .wrap{position:relative;z-index:2}
+  .hero-meta{display:flex;gap:var(--s-6);flex-wrap:wrap;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-50);margin-bottom:34px;align-items:center;opacity:0;animation:fade 1s .4s forwards}
+  .hero-meta span{display:inline-flex;align-items:center;gap:var(--s-2)}
+  .hero-meta .st{color:var(--ink-70)}
+  .hero-meta .dot{width:7px;height:7px;border-radius:50%;background:var(--positive);box-shadow:0 0 0 4px rgba(94,115,85,.15);animation:pulse 2.6s infinite}
+  .kicker{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-70);
+       border:1px solid var(--rule);border-radius:100px;padding:8px 8px 8px 16px;background:rgba(255,255,255,.4);opacity:0;animation:fade 1s .55s forwards}
+  .kicker b{font-family:var(--font-mono);font-weight:500;font-size:.62rem;letter-spacing:.1em;background:var(--ink);color:var(--accent);padding:4px 10px;border-radius:100px}
+  .hero-h{font-size:clamp(3rem,9.5vw,7.4rem);font-weight:500;margin:26px 0 0;letter-spacing:-0.035em}
+  .hero-h .line{display:block;overflow:hidden}
+  .hero-h .line span{display:block;transform:translateY(105%);animation:rise 1s var(--ease) forwards}
+  .hero-h .line:nth-child(2) span{animation-delay:.09s}
+  @keyframes rise{to{transform:translateY(0)}}
+  .hero-h em{font-style:normal;position:relative;color:var(--ink)}
+  .hero-h em::after{content:"";position:absolute;left:-.02em;right:-.02em;bottom:.08em;height:.30em;background:var(--accent);z-index:-1;transform:scaleX(0);transform-origin:left;animation:swipe .7s .85s var(--ease) forwards}
+  @keyframes swipe{to{transform:scaleX(1)}}
+  .hero-sub{max-width:620px;margin-top:30px;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--ink-70);opacity:0;animation:fade 1s .75s forwards}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;opacity:0;animation:fade 1s .95s forwards}
+  @keyframes fade{to{opacity:1}}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;padding:15px 26px;border-radius:100px;transition:.28s var(--ease);border:1px solid var(--ink)}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--accent);color:var(--ink);border-color:var(--accent);transform:translateY(-2px)}
+  .btn-primary .arrow{transition:.28s var(--ease)}
+  .btn-primary:hover .arrow{transform:translate(4px,-4px)}
+  .btn-ghost{background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+
+  /* ---------- ticker ---------- */
+  .ticker{background:var(--ink);color:var(--paper);padding:var(--s-3) 0;overflow:hidden;position:relative;z-index:1}
+  .ticker__track{display:flex;gap:var(--s-12);animation:scroll 60s linear infinite;width:max-content;will-change:transform}
+  .ticker__item{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;display:inline-flex;align-items:center;gap:var(--s-12);white-space:nowrap}
+  .ticker__item::after{content:'/';opacity:.4}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(56px,7vw,96px) 0;position:relative}
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+  .eyebrow .num{font-family:var(--font-mono);font-size:.72rem;color:var(--ink);background:var(--accent);padding:3px 9px;border-radius:5px;letter-spacing:.08em}
+  .sec-h{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-0.03em;max-width:900px;text-wrap:balance}
+  .lead{font-size:clamp(1.05rem,2vw,1.28rem);color:var(--ink-70);max-width:64ch;margin-top:22px;text-wrap:pretty}
+
+  /* emoji kit (stesso del sito) */
+  .emo{height:.82em;width:auto;display:inline-block;vertical-align:-0.06em;margin-left:.12em}
+  .emo-lg{height:34px;width:auto;display:block;margin-bottom:16px}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+  /* ---------- dark sections (grid continua anche sul nero) ---------- */
+  .section-dark{background:var(--ink);color:var(--paper);
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:64px 64px}
+  .section-dark .lead,.section-dark .sec-h{color:var(--paper)}
+  .section-dark .mono{color:#9a988f}
+
+  /* ---------- WHY: stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:60px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden}
+  .stat{background:var(--ink);padding:34px 28px}
+  .stat .big{font-family:var(--font-display);font-size:clamp(2.6rem,6vw,4rem);line-height:1;color:var(--accent);letter-spacing:-0.03em}
+  .stat .lbl{margin-top:14px;color:#c9c7be;font-size:.95rem;max-width:26ch}
+  .whybox{margin-top:46px;border-left:2px solid var(--accent);padding:8px 0 8px 24px}
+  .whybox p{font-family:var(--font-display);font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.25;letter-spacing:-0.02em;color:var(--paper)}
+
+  /* ---------- COMPARISON ---------- */
+  .cmp{margin-top:64px;display:grid;grid-template-columns:180px repeat(3,1fr);gap:0;border:1px solid var(--rule);border-radius:18px;overflow:hidden;background:var(--paper-warm)}
+  .cmp .cell{padding:20px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);font-size:.92rem}
+  .cmp .cell:nth-child(4n){border-right:none}
+  .cmp .rowlbl{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-50);background:var(--paper-2);display:flex;align-items:center}
+  .cmp .head{font-family:var(--font-display);font-size:1.15rem;letter-spacing:-0.02em;padding:24px 20px 26px;background:var(--paper-2)}
+  .cmp .head small{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink-50);margin-top:6px;font-weight:400;text-transform:uppercase}
+  .cmp .col-growth.head{background:var(--ink);color:var(--paper)}
+  .cmp .col-growth.head small{color:var(--accent)}
+  .cmp .cell.g{background:rgba(215,255,58,.14)}
+  .cmp .cell.g strong{color:var(--ink)}
+  /* badge originale, dentro l'header (niente clipping) */
+  .kbadge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--accent);color:var(--ink);padding:5px 11px 5px 9px;border-radius:100px;margin-bottom:14px;transform:rotate(-1.5deg);box-shadow:0 4px 14px rgba(215,255,58,.25)}
+  .kbadge .star{width:11px;height:11px;display:inline-block;animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .kbadge .pd{width:6px;height:6px;border-radius:50%;background:var(--ink);animation:pulse 1.8s infinite}
+  .cmp-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* ---------- MINDSET ---------- */
+  .mind{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+  .mcard{border:1px solid var(--rule);border-radius:16px;padding:30px 26px;background:var(--paper-warm);transition:.35s var(--ease);position:relative;overflow:hidden}
+  .mcard:hover{transform:translateY(-5px);border-color:var(--ink);box-shadow:0 18px 40px rgba(10,10,10,.08)}
+  .mcard .qt{font-family:var(--font-display);font-size:1.4rem;line-height:1.2;letter-spacing:-0.02em;color:var(--ink);margin-bottom:14px}
+  .mcard .qt s{text-decoration-color:var(--coral);text-decoration-thickness:2px}
+  .mcard p{color:var(--ink-70);font-size:.96rem}
+  .mcard .idx{font-family:var(--font-mono);font-size:.7rem;color:var(--ink-50);margin-bottom:18px;letter-spacing:.1em}
+
+  /* ---------- SYSTEM / pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+  .pillar{border:1px solid var(--rule);border-radius:16px;padding:30px 26px;background:var(--paper);color:var(--ink);position:relative;transition:.35s var(--ease)}
+  .pillar:hover{border-color:var(--ink)}
+  .pillar .pn{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;color:var(--ink-50)}
+  .pillar h3{font-size:1.5rem;margin:12px 0 10px}
+  .pillar p{color:var(--ink-70);font-size:.95rem}
+  .pillar .ico{width:44px;height:44px;border-radius:11px;background:var(--accent);display:grid;place-items:center;margin-bottom:8px;font-family:var(--font-display);font-weight:700;font-size:1.2rem;color:var(--ink)}
+  .loop{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:center;padding:30px 26px;border:1px dashed rgba(255,255,255,.28);border-radius:16px;background:rgba(255,255,255,.03)}
+  .loop .step{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.06em;padding:11px 17px;border:1px solid var(--paper);border-radius:100px;background:var(--paper);color:var(--ink)}
+  .loop .step.exp{background:var(--accent);color:var(--ink);border-color:var(--accent);font-weight:500}
+  .loop .arr{color:var(--accent);font-size:1.1rem}
+
+  /* ---------- OPERATING MODELS ---------- */
+  .ops{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+  .opcard{border:1px solid var(--rule);border-radius:20px;padding:38px 34px;background:var(--paper-warm);position:relative;overflow:hidden}
+  .opcard.fx{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .opcard .kicker2{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-50)}
+  .opcard.fx .kicker2{color:var(--accent)}
+  .opcard h3{font-size:1.9rem;margin:10px 0 6px}
+  .opcard .oneline{font-size:1rem;color:var(--ink-70);margin-bottom:22px;min-height:3em}
+  .opcard.fx .oneline{color:#c9c7be}
+  .opcard ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .opcard li{display:flex;gap:12px;font-size:.95rem;align-items:flex-start}
+  .opcard li .b{color:var(--positive);flex:0 0 auto;font-weight:700}
+  .opcard.fx li .b{color:var(--accent)}
+  .opcard .ex{margin-top:22px;padding-top:20px;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-50)}
+  .opcard.fx .ex{border-top-color:rgba(255,255,255,.16);color:var(--ink-30)}
+  .opcard .ex b{color:var(--ink);font-weight:600}
+  .opcard.fx .ex b{color:var(--paper)}
+  .flexnote{margin-top:34px;display:flex;gap:16px;align-items:flex-start;background:rgba(215,255,58,.16);border:1px solid var(--accent);border-radius:14px;padding:22px 26px}
+  .flexnote .mk{font-family:var(--font-display);font-size:1.6rem;line-height:1}
+  .flexnote p{font-size:1rem;color:var(--ink)}
+  .flexnote strong{font-weight:600}
+
+  /* ---------- come lavoro io → transizione (niente card, così non si confonde) ---------- */
+  .ops-note{max-width:44ch;margin:clamp(52px,6.5vw,92px) auto 0;text-align:center;color:var(--ink-70);font-size:clamp(1.2rem,2.3vw,1.6rem);line-height:1.45;letter-spacing:-0.01em}
+  .ops-note b{color:var(--ink);font-weight:600}
+  .ops-note .dn{display:inline-block;color:var(--ink);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  #models{padding-bottom:clamp(36px,4.5vw,58px)}
+  #call{padding-top:clamp(36px,4.5vw,58px)}
+
+  /* percorso a 3 fasi dentro il blocco scuro della CTA */
+  .cta-eyebrow{position:relative;display:inline-block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+  .cta-path{position:relative;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:0 auto 30px;max-width:820px}
+  .cta-step{display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.76rem;color:var(--paper);border:1px solid rgba(255,255,255,.26);border-radius:100px;padding:10px 16px;background:rgba(255,255,255,.04)}
+  .cta-step i{font-style:normal;font-size:.64rem;color:#9a988f}
+  .cta-step.on{background:var(--accent);color:var(--ink);border-color:var(--accent);font-weight:500}
+  .cta-step.on i{color:var(--ink)}
+  .cta-arr{color:#7d8a5b;font-size:1.05rem}
+  @media(max-width:860px){.cta-path{flex-direction:column}.cta-arr{transform:rotate(90deg)}}
+
+  /* ---------- CTA ---------- */
+  .cta-final{background:var(--ink);color:var(--paper);text-align:center;border-radius:28px;padding:clamp(50px,8vw,90px) 30px;position:relative;overflow:hidden}
+  .cta-final::before{content:"";position:absolute;width:400px;height:400px;background:var(--accent);border-radius:50%;filter:blur(80px);opacity:.28;top:-140px;left:50%;transform:translateX(-50%)}
+  .cta-final h2{position:relative;font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-0.03em;color:var(--paper)}
+  .cta-final p{position:relative;color:#c9c7be;max-width:52ch;margin:20px auto 0;font-size:1.1rem}
+  .cta-final .btn-primary{position:relative;margin-top:34px;background:var(--accent);color:var(--ink);border-color:var(--accent)}
+  .cta-final .btn-primary:hover{background:var(--paper);border-color:var(--paper)}
+
+  /* ---------- footer (stile sito) ---------- */
+  footer{background:var(--ink);color:var(--ink-30);padding:var(--s-8) 0 var(--s-6);border-top:1px solid var(--ink-70);
+    font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;overflow:hidden;position:relative;z-index:1}
+  footer .finner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s-4)}
+  footer .fdot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:8px;vertical-align:middle}
+  footer .fmassive{font-family:var(--font-display);font-weight:400;font-size:clamp(80px,18vw,280px);line-height:.85;letter-spacing:-0.05em;color:var(--ink-90);
+    margin-top:var(--s-12);padding-top:var(--s-8);border-top:1px solid var(--ink-70);white-space:nowrap;transition:color .5s ease;display:inline-block}
+  footer .fmassive:hover{color:var(--paper)}
+  footer .fmassive em{font-style:italic;font-weight:300}
+
+  @media(max-width:860px){
+    .blob.a{width:280px;height:280px;opacity:.3;top:-110px;right:-70px}
+    .blob.b{opacity:.12}
+    .stats,.mind,.pillars,.ops{grid-template-columns:1fr}
+    .cmp{grid-template-columns:120px repeat(3,minmax(150px,1fr));min-width:640px}
+    .cmp-scroll{margin:56px calc(var(--gutter)*-1) 0;padding:0 var(--gutter)}
+    .frame-mark{width:16px;height:16px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero-h .line span{transform:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="frame-mark tl" aria-hidden="true"></div>
+<div class="frame-mark tr" aria-hidden="true"></div>
+<div class="frame-mark bl" aria-hidden="true"></div>
+<div class="frame-mark br" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Principale">
+  <a href="#top" class="nav__brand"><span class="nav__brand-dot"></span>Gabriele Fiorani</a>
+  <ul class="nav__links">
+    <li><a href="#what"><span>01</span> Cos'è</a></li>
+    <li><a href="#why"><span>02</span> Perché ora</a></li>
+    <li><a href="#diff"><span>03</span> La differenza</a></li>
+    <li><a href="#mindset"><span>04</span> Mindset</a></li>
+    <li><a href="#system"><span>05</span> Il sistema</a></li>
+    <li><a href="#models"><span>06</span> Come lavoro</a></li>
+  </ul>
+  <a href="#call" class="nav__cta">Prenota una call</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header id="top">
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="wrap">
+    <div class="hero-meta">
+      <span class="st"><span class="dot"></span>Disponibile per nuovi progetti e collaborazioni</span>
+    </div>
+    <h1 class="hero-h">
+      <span class="line"><span>Non è marketing.</span></span>
+      <span class="line"><span>È <em>growth</em>.</span></span>
+    </h1>
+    <p class="hero-sub">Tutti conoscono il marketing. In pochi capiscono davvero cosa fa un <strong>Growth Marketer</strong>, o un <strong>Chief Growth Officer</strong>. Qui trovi la differenza, raccontata in modo che chiunque possa afferrarla in pochi minuti.</p>
+    <div class="hero-actions">
+      <a href="#call" class="btn btn-primary">Parliamo di crescita <span class="arrow">↗</span></a>
+      <a href="#diff" class="btn btn-ghost">Scopri la differenza</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span class="ticker__item">Acquisition</span><span class="ticker__item">Retention</span><span class="ticker__item">Monetization</span><span class="ticker__item">Sperimentazione</span><span class="ticker__item">Growth Loop</span><span class="ticker__item">Analytics &amp; Data</span><span class="ticker__item">Product Growth</span><span class="ticker__item">CRO</span>
+    <span class="ticker__item">Acquisition</span><span class="ticker__item">Retention</span><span class="ticker__item">Monetization</span><span class="ticker__item">Sperimentazione</span><span class="ticker__item">Growth Loop</span><span class="ticker__item">Analytics &amp; Data</span><span class="ticker__item">Product Growth</span><span class="ticker__item">CRO</span>
+  </div>
+</div>
+
+<!-- ============ WHAT IS GROWTH ============ -->
+<section id="what">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">01</span><span class="mono">Cos'è il growth</span></div>
+    <h2 class="sec-h reveal">Il growth non è un canale. È un <span class="hl">metodo per far crescere un business in modo prevedibile</span><img class="emo" src="img/emoji/compass.png" alt="" aria-hidden="true" /></h2>
+    <p class="lead reveal d1">Il marketing classico presidia i canali: sceglie un budget, decide dove spendere e lo esegue. Il growth fa un passo indietro e guarda l'intero business come un sistema fatto di <strong>acquisizione, retention e monetizzazione</strong>, poi cerca, misura e sperimenta le leve che lo fanno scalare. Non singole campagne, ma un motore di crescita continuo e replicabile.</p>
+    <p class="lead reveal d2">In una frase: il marketer <strong>esegue un piano</strong>, il growth <strong>costruisce e ottimizza il sistema</strong> che genera crescita, e basa ogni decisione sui dati e sugli esperimenti invece che sull'intuizione.</p>
+  </div>
+</section>
+
+<!-- ============ WHY NOW (dark) ============ -->
+<section class="section-dark" id="why">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">02</span><span class="mono">Perché oggi conta</span></div>
+    <h2 class="sec-h reveal">Un tempo si sperimentava per crescere.<br/>Oggi si sperimenta per <span style="color:var(--accent)">sopravvivere</span><img class="emo" src="img/emoji/fire.png" alt="" aria-hidden="true" /></h2>
+    <p class="lead reveal d1">Il mercato è cambiato. Fare business oggi è più facile che mai, e questo significa competitor che spuntano ovunque, canali che si saturano in fretta e clienti che costano sempre di più. Restare su un solo canale, con un budget deciso a inizio anno, è diventato il rischio più grande.</p>
+
+    <div class="stats reveal d2">
+      <div class="stat">
+        <div class="big"><span class="count" data-to="300" data-suffix="%">0%</span></div>
+        <div class="lbl">L'aumento medio del costo di acquisizione (CPM) negli ultimi anni. I canali che ieri erano economici oggi non lo sono più.</div>
+      </div>
+      <div class="stat">
+        <div class="big"><span class="count" data-to="50" data-suffix="+">0</span></div>
+        <div class="lbl">Gli esperimenti che un sistema di growth può lanciare in un anno, contro l'unica cartuccia di chi decide tutto a monte.</div>
+      </div>
+      <div class="stat">
+        <div class="big"><span class="count" data-to="3">0</span></div>
+        <div class="lbl">I pilastri su cui interviene: acquisition, retention e monetization. Il marketing classico spesso ne presidia solo uno.</div>
+      </div>
+    </div>
+
+    <div class="whybox reveal d2">
+      <p>«Chi decide budget e canali una volta all'anno ha una sola freccia. Chi sperimenta ogni settimana ne ha cinquanta.»</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE DIFFERENCE (comparison) ============ -->
+<section id="diff">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">03</span><span class="mono">La differenza, nero su bianco</span></div>
+    <h2 class="sec-h reveal">Digital marketer, growth marketer, product growth: <span class="hl">non sono la stessa cosa.</span></h2>
+    <p class="lead reveal d1">Tre ruoli che vengono spesso confusi. La differenza non sta nel nome più altisonante, ma nell'ampiezza del terreno di gioco, nelle metriche di cui rispondi e in quanto lontano ti spingi a sperimentare.</p>
+
+    <div class="cmp-scroll reveal d2">
+      <div class="cmp">
+        <div class="cell rowlbl"></div>
+        <div class="cell head">Digital&nbsp;Marketer<small>Esegue il piano</small></div>
+        <div class="cell head col-growth"><span class="kbadge"><svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.6 6.9L22 9.3l-5.4 4.6L18.3 22 12 17.8 5.7 22l1.7-8.1L2 9.3l7.4-.4z"/></svg><span class="pd"></span>Il ruolo chiave</span>Growth&nbsp;Marketer<small>Costruisce il sistema</small></div>
+        <div class="cell head">Product&nbsp;Growth<small>Cresce dal prodotto</small></div>
+
+        <div class="cell rowlbl">Focus</div>
+        <div class="cell">Solo <strong>acquisizione</strong>, dentro un piano marketing già definito.</div>
+        <div class="cell g"><strong>Acquisizione, retention e monetizzazione</strong>, viste come un unico sistema.</div>
+        <div class="cell">Comportamento degli utenti <strong>dentro al prodotto</strong>.</div>
+
+        <div class="cell rowlbl">Canali</div>
+        <div class="cell">Presidia i canali <strong>decisi da budget e piano</strong>.</div>
+        <div class="cell g">Presidia i canali esistenti e allo stesso tempo <strong>ne testa di nuovi</strong>, anche non convenzionali.</div>
+        <div class="cell">Crea <strong>loop di acquisizione</strong> generati dal prodotto stesso.</div>
+
+        <div class="cell rowlbl">Metriche</div>
+        <div class="cell">Metriche di canale: reach, CPC, CPL, CAC, CTR, MQL.</div>
+        <div class="cell g">Le stesse, con in più gli <strong>economics</strong>: LTV, coorti, fatturato, activation, retention.</div>
+        <div class="cell">Activation, engagement, abitudine, <strong>aha moment</strong>.</div>
+
+        <div class="cell rowlbl">Crescita</div>
+        <div class="cell">Lineare: ottimizza il <strong>funnel</strong> esistente.</div>
+        <div class="cell g">Anche <strong>esponenziale</strong>: costruisce loop e leve di crescita composta.</div>
+        <div class="cell">Il prodotto che <strong>acquisisce e trattiene</strong> da solo.</div>
+
+        <div class="cell rowlbl">Sperimenta&nbsp;su</div>
+        <div class="cell">Creatività, target, posizionamento, sempre <strong>dentro canali e budget</strong>.</div>
+        <div class="cell g"><strong>Tutto il sistema</strong>: nuovi canali, loop, pricing, onboarding, retention.</div>
+        <div class="cell">Feature, onboarding, meccaniche di engagement.</div>
+      </div>
+    </div>
+    <p class="lead reveal d1" style="margin-top:34px">In pratica il <strong>growth marketer non si ferma al piano</strong>: presidia ciò che già funziona e insieme cerca, in modo strutturato, nuove leve di crescita, collegando marketing e prodotto. È il ponte che il digital marketing e il product growth, presi da soli, non costruiscono.</p>
+  </div>
+</section>
+
+<!-- ============ MINDSET ============ -->
+<section id="mindset">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">04</span><span class="mono">Il mindset che cambia tutto</span></div>
+    <h2 class="sec-h reveal">Prima ancora delle tattiche, il growth è un <span class="hl">modo di pensare</span><img class="emo" src="img/emoji/brain.png" alt="" aria-hidden="true" /></h2>
+    <div class="mind">
+      <div class="mcard reveal d1">
+        <img class="emo-lg" src="img/emoji/compass.png" alt="" aria-hidden="true" />
+        <div class="idx">PRINCIPIO 01</div>
+        <div class="qt"><s>«Da noi non si può fare»</s></div>
+        <p>L'alibi più costoso che esista. Le vere leve di crescita nascono rubando strategie da settori lontani e chiedendosi: «ci sarà un modo per applicarlo al mio business?». Chi accetta quella sfida trova spunti che i concorrenti non hanno ancora esplorato.</p>
+      </div>
+      <div class="mcard reveal d2">
+        <img class="emo-lg" src="img/emoji/chat.png" alt="" aria-hidden="true" />
+        <div class="idx">PRINCIPIO 02</div>
+        <div class="qt">B2B è sempre <span style="color:var(--positive)">Human&nbsp;to&nbsp;Human</span></div>
+        <p>«Sì, ma io faccio B2B» non è più una scusa valida. B2B e B2C si stanno avvicinando, e dietro ogni acquisto ci sono sempre persone. Le tecniche migliori si contaminano tra i due mondi, ed è lì che si nasconde la crescita.</p>
+      </div>
+      <div class="mcard reveal d3">
+        <img class="emo-lg" src="img/emoji/fire.png" alt="" aria-hidden="true" />
+        <div class="idx">PRINCIPIO 03</div>
+        <div class="qt">Meglio testare<br/>che pianificare all'infinito</div>
+        <p>Mettere a terra le cose in fretta, anche se imperfette, e validarle sul campo con test rapidi. Un'idea provata con i dati vale più di dieci supposizioni perfette rimaste in una slide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SYSTEM ============ -->
+<section id="system" class="section-dark">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">05</span><span class="mono">Come lavora davvero</span></div>
+    <h2 class="sec-h reveal">Un sistema su tre pilastri, mosso da un motore di <span style="color:var(--accent)">sperimentazione</span><img class="emo" src="img/emoji/toolbox.png" alt="" aria-hidden="true" /></h2>
+    <p class="lead reveal d1">Il growth non insegue la singola campagna. Costruisce e ottimizza tre pilastri collegati tra loro, e li fa girare con cicli di test rapidi e prioritizzati (framework come F.I.E. e ICE) invece di scommettere tutto una volta l'anno.</p>
+
+    <div class="pillars">
+      <div class="pillar reveal d1">
+        <div class="ico">A</div>
+        <div class="pn">PILASTRO 01</div>
+        <h3>Acquisition</h3>
+        <p>Portare le persone giuste dentro al prodotto, abbassando la friction. Non solo ads: nuovi canali, value ladder e loop che generano crescita composta.</p>
+      </div>
+      <div class="pillar reveal d2">
+        <div class="ico">R</div>
+        <div class="pn">PILASTRO 02</div>
+        <h3>Retention</h3>
+        <p>Trasformare l'acquisizione in valore reale con onboarding, activation, aha moment, engagement loop e recupero del churn. È qui che si vince o si perde.</p>
+      </div>
+      <div class="pillar reveal d3">
+        <div class="ico">M</div>
+        <div class="pn">PILASTRO 03</div>
+        <h3>Monetization</h3>
+        <p>Estrarre valore in modo sostenibile con modelli di pricing, cross-sell, upsell e recupero dei pagamenti. La crescita che diventa profitto.</p>
+      </div>
+    </div>
+
+    <div class="loop reveal d2">
+      <span class="step">Idea / assumption</span><span class="arr">→</span>
+      <span class="step">Prioritizza (ICE)</span><span class="arr">→</span>
+      <span class="step exp">Esperimento</span><span class="arr">→</span>
+      <span class="step">Misura i dati</span><span class="arr">→</span>
+      <span class="step">Impara e scala</span><span class="arr">↺</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPERATING MODELS ============ -->
+<section id="models">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">06</span><span class="mono">Come si ingaggia un growth</span></div>
+    <h2 class="sec-h reveal">Freelance o fractional? <span class="hl">Due modi di lavorare, obiettivi diversi.</span></h2>
+    <p class="lead reveal d1">Un professionista growth entra in azienda in due modi. Non è una questione di quanto è bravo, ma di orizzonte e livello di responsabilità. Ecco la differenza, con esempi concreti.</p>
+
+    <div class="ops">
+      <div class="opcard reveal d1">
+        <div class="kicker2">Modello A</div>
+        <h3>Freelance / Consulente</h3>
+        <p class="oneline">Entra su un <strong>obiettivo preciso</strong>, lo porta a casa ed esce.</p>
+        <ul>
+          <li><span class="b">→</span><span>Ingaggio <strong>a progetto o a ore</strong>, su un deliverable circoscritto.</span></li>
+          <li><span class="b">→</span><span>Taglio <strong>esecutivo e tattico</strong>: audit, setup del tracking, uno sprint di esperimenti, il lancio di un canale.</span></li>
+          <li><span class="b">→</span><span>Relazione <strong>breve o media</strong>, tutta concentrata sull'output.</span></li>
+          <li><span class="b">→</span><span>Ideale quando serve una <strong>competenza precisa, subito</strong>.</span></li>
+        </ul>
+        <div class="ex"><b>Esempio:</b> «sistemami il funnel di acquisizione e imposta il tracking in sei settimane». Prezzo a progetto o a giornata.</div>
+      </div>
+
+      <div class="opcard fx reveal d2">
+        <div class="kicker2">Modello B</div>
+        <h3>Fractional CGO</h3>
+        <p class="oneline">Un <strong>Chief Growth Officer part-time</strong> che guida la crescita in modo continuativo, senza il costo di una figura full-time.</p>
+        <ul>
+          <li><span class="b">→</span><span>Ruolo <strong>dirigenziale a frazione</strong> (da uno a tre giorni a settimana), su più mesi.</span></li>
+          <li><span class="b">→</span><span>Siede nella <strong>leadership</strong> e definisce strategia, north star, KPI e priorità.</span></li>
+          <li><span class="b">→</span><span>Costruisce il <strong>growth model</strong>, il processo di sperimentazione e forma il team interno.</span></li>
+          <li><span class="b">→</span><span>Risponde della <strong>crescita</strong> nel suo insieme, non di un singolo task.</span></li>
+        </ul>
+        <div class="ex"><b>Esempio:</b> una startup o una PMI che non può permettersi un CGO full-time ottiene seniority strategica a una <b>frazione del costo</b>.</div>
+      </div>
+    </div>
+
+    <p class="ops-note reveal"><b>Come lavoro io:</b> non devi scegliere adesso. Di solito partiamo leggeri e lasciamo che sia il business a dirci quanto in profondità andare. Ecco come iniziamo <span class="dn">↓</span></p>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="call">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <span class="cta-eyebrow">Cominciamo?</span>
+      <div class="cta-path">
+        <span class="cta-step"><i>01</i>Call conoscitiva</span>
+        <span class="cta-arr">→</span>
+        <span class="cta-step"><i>02</i>Progetto o audit</span>
+        <span class="cta-arr">→</span>
+        <span class="cta-step on"><i>03</i>Fractional continuativo</span>
+      </div>
+      <h2>Diamo alla crescita<br/>un metodo <img class="emo" src="img/emoji/rocket.png" alt="" aria-hidden="true" /></h2>
+      <p>Trenta minuti, nessun impegno. Capiamo insieme dove puoi crescere e qual è il modo giusto per lavorare insieme.<br/><b style="color:var(--accent)">La Fase 01 è proprio questa call.</b></p>
+      <a href="https://gabrielefiorani.it" class="btn btn-primary">Prenota una call <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="finner">
+      <span><span class="fdot"></span>© 2026 · Gabriele Fiorani</span>
+      <span>Made with ♥ in Milano</span>
+    </div>
+    <div class="fmassive">Fiorani<em>*</em></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const darks=[...document.querySelectorAll('.section-dark, footer')];
+  function onScroll(){
+    nav.classList.toggle('is-scrolled',window.scrollY>20);
+    const y=34;
+    const onDark=darks.some(s=>{const r=s.getBoundingClientRect();return r.top<=y && r.bottom>=y;});
+    nav.classList.toggle('is-on-dark',onDark);
+  }
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // animated counters
+  const fmt=(n)=>Math.round(n).toLocaleString('it-IT');
+  const cio=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target,to=+el.dataset.to,suf=el.dataset.suffix||'';
+      const dur=1400,t0=performance.now();
+      const step=(t)=>{const p=Math.min((t-t0)/dur,1);el.textContent=fmt(to*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);cio.unobserve(el);
+    });
+  },{threshold:0.6});
+  document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+</script>
+</body>
+</html>
